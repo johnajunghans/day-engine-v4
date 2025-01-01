@@ -2,9 +2,9 @@
 
 import { createContext, ReactNode, useContext, useEffect, useState } from "react"
 
-type Mode = "light" | "dark"
-type Color = "default" | "blue" | "green" | "purple"
-type Theme = `${Mode} ${Color}`
+export type Mode = "light" | "dark"
+export type Color = "default" | "blue" | "green" | "purple"
+export type Theme = `${Mode} ${Color}`
 
 type ThemeContextType = {
     theme: Theme,

@@ -12,6 +12,7 @@ export default {
   		colors: {
 			de_orange: '#F1B049',
 			de_orange_light: '#9C803D',
+			de_orange_light_muted: 'var(--de-orange-light-muted)',
 			white_muted: 'rgba(255,255,255,0.6)',
 			backdrop: 'var(--backdrop)',
   			background: 'var(--background)',
@@ -59,7 +60,10 @@ export default {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
+		animation: {
+			'logo-spin': 'spin 120s linear infinite'
+		}
   	}
   },
   plugins: [require("tailwindcss-animate")],

@@ -1,4 +1,5 @@
 import { FunctionComponent } from "react";
+import Navbar from "../(components)/navbar";
 
 interface DashboardProps {
     
@@ -6,7 +7,9 @@ interface DashboardProps {
  
 const Dashboard: FunctionComponent<DashboardProps> = () => {
     return (  
-        <div>Dashboard</div>
+        <div className="flex gap-4 p-4">
+            <Navbar />
+        </div>
     );
 }
  

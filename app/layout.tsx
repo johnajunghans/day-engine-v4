@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${philosopher.variable} bg-backdrop antialiased`}
+        className={`${philosopher.variable} min-h-screen bg-backdrop antialiased`}
       >
         <ThemeProvider>{children}</ThemeProvider>
       </body>
