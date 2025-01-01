@@ -35,8 +35,11 @@ body {
     --radius: 0.5rem;
   }
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
+    --backdrop: #181207;
+    --background: #2E281E;
+    --de-orange-light-muted: #65542D;
+
+    --foreground: #FFFFFF;
     --card: 0 0% 3.9%;
     --card-foreground: 0 0% 98%;
     --popover: 0 0% 3.9%;
@@ -59,6 +62,34 @@ body {
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+  }
+
+  html[data-theme*="dark"] {
+    --foreground: #FFFFFF;
+  }
+
+  html[data-theme="dark default"] {
+    --backdrop: #181207;
+    --background: #2E281E;
+    --de-orange-light-muted: #65542D;
+  }
+
+  html[data-theme="dark blue"] {
+    --backdrop: #061F48;
+    --background: #1E355A;
+    --de-orange-light-muted: #5D5A4B;
+  }
+
+  html[data-theme="dark green"] {
+    --backdrop: #172D22;
+    --background: #2E4238;
+    --de-orange-light-muted: #65613A;
+  }
+
+  html[data-theme="dark purple"] {
+    --backdrop: #280E34;
+    --background: #3D2648;
+    --de-orange-light-muted: #6C5342;
   }
 }
 
