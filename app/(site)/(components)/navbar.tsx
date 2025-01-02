@@ -42,7 +42,7 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
                 </div>
                 
             </div>
-            <Button variant="primary" className="h-12 p-2">Try for Free</Button>
+            <Button variant="primary" className="h-12 p-2 text-white/90 bg-de_orange/50 border border-de_orange/75 hover:bg-de_orange/55 hover:border-de_orange/90">Try for Free</Button>
         </div> 
         
     );
