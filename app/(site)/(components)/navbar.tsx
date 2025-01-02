@@ -1,5 +1,6 @@
 'use client'
 
+import ThemeSelector from "@/components/common/theme-selector";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Lock } from "lucide-react";
@@ -7,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FunctionComponent } from "react";
+import LoginPopover from "./login-popover";
 
 interface NavbarProps {
     
@@ -34,10 +36,11 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
                         <Link key={link.name} href={link.href} className={`${pathname.startsWith(link.href) ? "text-de_orange" : "text-white_muted hover:text-white/80" }`}>{link.name}</Link>
                     ))}
                 </nav>
-                <Button variant="text">
-                    <span>Login</span>
-                    <Lock />
-                </Button>
+                <div className="flex items-center">
+                    <ThemeSelector />
+                    <LoginPopover />
+                </div>
+                
             </div>
             <Button variant="primary" className="h-12 p-2">Try for Free</Button>
         </div> 
