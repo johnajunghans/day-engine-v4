@@ -66,5 +66,10 @@ export default {
 		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+	require("tailwindcss-animate"),
+	function ({ addVariant }) {
+		addVariant('autofill', '&:-webkit-autofill');
+	}
+],
 } satisfies Config;

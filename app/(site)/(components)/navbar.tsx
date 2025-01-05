@@ -3,7 +3,6 @@
 import ThemeSelector from "@/components/common/theme-selector";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Lock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -37,8 +36,12 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
                     ))}
                 </nav>
                 <div className="flex items-center">
-                    <ThemeSelector />
-                    <LoginPopover />
+                    <div className="flex gap-1 items-center">
+                        <ThemeSelector align="end" />
+                        <Separator orientation="vertical" className="h-8" />
+                        <LoginPopover />
+                    </div>
+                    
                 </div>
                 
             </div>

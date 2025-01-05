@@ -1,13 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Lock } from "lucide-react";
-import { FunctionComponent } from "react";
+import { Eye, EyeOff, Lock } from "lucide-react";
+import { FunctionComponent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Input } from "@/components/ui/input";
 import InputLabelWrapper from "@/components/ui/custom/input-label-wrapper";
+import { login } from "@/app/(auth)/login/actions";
 
 interface LoginPopoverProps {
     
@@ -26,6 +27,8 @@ const formSchema = z.object({
  
 const LoginPopover: FunctionComponent<LoginPopoverProps> = () => {
 
+    const [showPassword, setShowPassword] = useState(false)
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -34,27 +37,31 @@ const LoginPopover: FunctionComponent<LoginPopoverProps> = () => {
         }
     });
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values)
+    function onCreateAccount() {
+        // handle create account click
+    }
+
+    function onForgotPassword() {
+
     }
 
     return (  
         <Popover>
             <PopoverTrigger asChild>
-                <Button variant="text">
+                <Button variant="text" className="px-2">
                     <span>Login</span>
                     <Lock />
                 </Button>
             </PopoverTrigger>
             <PopoverContent>
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="w-[400px] flex flex-col gap-4 my-2">
+                    <form className="w-[400px] flex flex-col gap-4 mt-1">
                         <FormField control={form.control} name="email" render={({ field }) => (
                             <FormItem>
                                 {/* <FormLabel>Email</FormLabel> */}
                                 <FormControl>
                                     <InputLabelWrapper label="EMAIL">
-                                        <Input {...field} />
+                                        <Input className="font-[family-name:var(--font-jb-mono)]" type="email" required {...field} />
                                     </InputLabelWrapper>
                                 </FormControl>
                                 <FormMessage />
@@ -64,13 +71,20 @@ const LoginPopover: FunctionComponent<LoginPopoverProps> = () => {
                             <FormItem>
                                 <FormControl>
                                     <InputLabelWrapper label="PASSWORD">
-                                        <Input {...field} />
+                                        <Input className="font-[family-name:var(--font-jb-mono)]" type={showPassword ? "text" : "password"} required {...field} />
+                                        <Button className="absolute right-3 h-4 top-4 p-2 focus-visible:ring-de_orange_light" type="button" variant="text" onClick={() => setShowPassword(!showPassword)}>{showPassword ? <EyeOff /> : <Eye />}</Button>
                                     </InputLabelWrapper>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )} />
-                        <Button type="submit" variant="primary">Login</Button>
+                        <div className="flex justify-between">
+                            <div className="flex gap-2">
+                                <Button formAction={login} type="submit" variant="primary">Login</Button>
+                                <Button onClick={onCreateAccount} disabled type="button" variant="secondary">Create an Account</Button>
+                            </div>
+                            <Button onClick={onForgotPassword} disabled type="button" variant="text">Forgot Password?</Button>
+                        </div>
                     </form>
                 </Form>
             </PopoverContent>

@@ -4,13 +4,13 @@ import { SwatchBook } from "lucide-react";
 import { Color, Mode, useTheme } from "@/context/theme-provider";
 
 interface ThemeSelectorProps {
-    
+    align: "center" | "end" | "start";
 }
 
 const modes: Mode[] = ["light", "dark"]
 const colors: Color[] = ["default", "blue", "green", "purple"]
  
-const ThemeSelector: FunctionComponent<ThemeSelectorProps> = () => {
+const ThemeSelector: FunctionComponent<ThemeSelectorProps> = ({ align="end" }) => {
 
     const { theme, setTheme } = useTheme();
     const [currentMode, currentColor]: [Mode, Color] = theme.split(" ") as [Mode, Color];
@@ -28,7 +28,7 @@ const ThemeSelector: FunctionComponent<ThemeSelectorProps> = () => {
             <DropdownMenuTrigger asChild>
                 <SwatchBook role="button" className="stroke-de_orange_light w-8 h-8 p-1 hover:bg-white/5 rounded-sm cursor-pointer"/>
             </DropdownMenuTrigger>
-            <DropdownMenuContent>
+            <DropdownMenuContent sideOffset={16} align={align}>
                 <DropdownMenuLabel>THEME</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuRadioGroup value={mode} onChange={setMode}>

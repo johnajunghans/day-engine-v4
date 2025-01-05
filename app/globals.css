@@ -97,3 +97,19 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.input-label-wrapper label {
+  opacity: 0.5
+}
+
+.input-label-wrapper:focus-within label {
+  opacity: 1;
+}
+
+input:-webkit-autofill {
+  background-color: transparent;
+  -webkit-text-fill-color: white; /* Replace 'black' with your desired text color */
+  color: white;
+  transition: background-color 5000s ease-in-out 0s; /* Ensures smooth transitions */
+  font-family: var(--font-jb-mono);
+}

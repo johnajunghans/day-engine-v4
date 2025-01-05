@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Philosopher } from "next/font/google";
+import { Philosopher, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/context/theme-provider";
 
@@ -7,6 +7,12 @@ const philosopher = Philosopher({
   variable: "--font-philosopher",
   subsets: ["latin"],
   weight: ["400", "700"]
+})
+
+const jetBrainsMono = JetBrains_Mono({
+  variable: "--font-jb-mono",
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800"]
 })
 
 export const metadata: Metadata = {
@@ -22,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${philosopher.variable} min-h-screen bg-backdrop antialiased`}
+        className={`${philosopher.variable} ${jetBrainsMono.variable} min-h-screen bg-backdrop antialiased`}
       >
         <ThemeProvider>{children}</ThemeProvider>
       </body>
