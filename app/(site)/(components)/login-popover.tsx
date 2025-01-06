@@ -27,7 +27,8 @@ const formSchema = z.object({
  
 const LoginPopover: FunctionComponent<LoginPopoverProps> = () => {
 
-    const [showPassword, setShowPassword] = useState(false)
+    const [showPassword, setShowPassword] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -80,7 +81,7 @@ const LoginPopover: FunctionComponent<LoginPopoverProps> = () => {
                         )} />
                         <div className="flex justify-between">
                             <div className="flex gap-2">
-                                <Button formAction={login} type="submit" variant="primary">Login</Button>
+                                <Button formAction={login} type="submit" variant="primary" onClick={() => setIsLoading(true)} className={isLoading ? "bg-opacity-50" : "bg-opacity-100"}>Login</Button>
                                 <Button onClick={onCreateAccount} disabled type="button" variant="secondary">Create an Account</Button>
                             </div>
                             <Button onClick={onForgotPassword} disabled type="button" variant="text">Forgot Password?</Button>

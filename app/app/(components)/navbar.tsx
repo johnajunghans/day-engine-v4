@@ -21,9 +21,9 @@ const NavTile: FunctionComponent<NavTileProps> = ({ name }) => {
     const pathname = usePathname();
 
     return (
-        <Link href={name}>
-            <div className={`flex flex-col justify-center items-center gap-1 w-20 h-20 bg-background border border-de_orange_light rounded-md ${pathname !== 'link' ? "opacity-50 hover:opacity-75" : "opacity-100"}`}>
-                <Image src={`${name}.svg`} alt={name} width={40} height={40} />
+        <Link href={`/app/${name}`}>
+            <div className={`flex flex-col justify-center items-center gap-1 w-20 h-20 bg-background border border-de_orange_light rounded-md ${pathname !== `/app/${name}` ? "opacity-40 hover:opacity-60" : "opacity-100"}`}>
+                <Image src={`/${name}.svg`} alt={name} width={40} height={40} />
                 <span className="text-de_orange text-sm tracking-widest">{name.toUpperCase()}</span>
             </div>
         </Link>
