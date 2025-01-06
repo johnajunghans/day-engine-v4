@@ -9,7 +9,7 @@ export default function LabelledPanel ({ children, title, popover, button, minW 
 
     return (
         <ResizablePanel className={`min-w-[${minW}]`}>
-            <div className="flex justify-between pr-2 w-full items-center">
+            <div className="flex pr-2 gap-1 items-center">
                 <div className="py-2 px-4 border-b border-r flex justify-center items-center bg-background rounded-br-lg border-de_orange_light_muted">
                     <span className="text-de_orange text-xs tracking-widest">{title}</span>
                 </div>

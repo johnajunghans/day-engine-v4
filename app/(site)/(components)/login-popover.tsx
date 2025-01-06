@@ -59,7 +59,6 @@ const LoginPopover: FunctionComponent<LoginPopoverProps> = () => {
                     <form className="w-[400px] flex flex-col gap-4 mt-1">
                         <FormField control={form.control} name="email" render={({ field }) => (
                             <FormItem>
-                                {/* <FormLabel>Email</FormLabel> */}
                                 <FormControl>
                                     <InputLabelWrapper label="EMAIL">
                                         <Input className="font-[family-name:var(--font-jb-mono)]" type="email" required {...field} />

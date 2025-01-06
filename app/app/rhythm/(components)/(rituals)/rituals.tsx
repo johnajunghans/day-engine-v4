@@ -14,11 +14,8 @@ export default function Rituals({  }: RitualProps) {
     console.log(addRitualPopoverOpen)
 
     return (
-        <LabelledPanel 
-            title="RITUALS" 
-            popover={
-                <AddRitualPopover popoverControl={{ isOpen: addRitualPopoverOpen, setIsOpen: setAddRitualPopoverOpen }} />}>
-            <div>Rituals</div>
+        <LabelledPanel title="RITUALS" popover={<AddRitualPopover popoverControl={{ isOpen: addRitualPopoverOpen, setIsOpen: setAddRitualPopoverOpen }} />}>
+            <div className={`${addRitualPopoverOpen ? "blur-sm" : ""}`}>Rituals</div>
         </LabelledPanel>
     )
 }
