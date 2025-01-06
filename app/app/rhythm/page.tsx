@@ -12,7 +12,9 @@ export default function Rhythm() {
     return (
         <ResizablePanelGroup direction="horizontal" className="flex-grow min-h-[calc(100vh-16px)] border border-de_orange_light_muted rounded-lg">
             <LabelledPanel title="RITUALS" btnFunction={() => setAddRitualPopoverOpen(true)}>
-                <Rituals popoverOpen={addRitualPopoverOpen} />
+                <Rituals 
+                    createRitualPopoverControl={{ isOpen: addRitualPopoverOpen, setIsOpen: setAddRitualPopoverOpen }} 
+                />
             </LabelledPanel>
             <ResizableHandle />
             <LabelledPanel title="WHEEL" minW="100vh">

@@ -1,9 +1,18 @@
+import { Dispatch, SetStateAction } from "react"
+import AddRitualPopover from "./add-ritual-popover"
+
 type RitualProps = {
-    popoverOpen: boolean
+    createRitualPopoverControl: { isOpen: boolean, setIsOpen: Dispatch<SetStateAction<boolean>>}
 }
 
-export default function Rituals({ popoverOpen }: RitualProps) {
+export default function Rituals({ createRitualPopoverControl }: RitualProps) {
+
+    console.log(createRitualPopoverControl)
+
     return (
-        <div>Rituals</div>
+        <>
+            <div>Rituals</div>
+            <AddRitualPopover popoverControl={createRitualPopoverControl} />
+        </>
     )
 }
