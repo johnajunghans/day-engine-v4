@@ -1,18 +1,24 @@
-import { Dispatch, SetStateAction } from "react"
+'use client'
+
+import { useState } from "react"
 import AddRitualPopover from "./add-ritual-popover"
+import LabelledPanel from "@/app/app/(components)/labelled-panel"
 
 type RitualProps = {
-    createRitualPopoverControl: { isOpen: boolean, setIsOpen: Dispatch<SetStateAction<boolean>>}
+    
 }
 
-export default function Rituals({ createRitualPopoverControl }: RitualProps) {
+export default function Rituals({  }: RitualProps) {
 
-    console.log(createRitualPopoverControl)
+    const [addRitualPopoverOpen, setAddRitualPopoverOpen] = useState(false)
+    console.log(addRitualPopoverOpen)
 
     return (
-        <>
+        <LabelledPanel 
+            title="RITUALS" 
+            popover={
+                <AddRitualPopover popoverControl={{ isOpen: addRitualPopoverOpen, setIsOpen: setAddRitualPopoverOpen }} />}>
             <div>Rituals</div>
-            <AddRitualPopover popoverControl={createRitualPopoverControl} />
-        </>
+        </LabelledPanel>
     )
 }
