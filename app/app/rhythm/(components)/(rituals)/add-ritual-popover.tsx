@@ -10,6 +10,7 @@ import { Plus } from "lucide-react"
 import { Dispatch, SetStateAction, useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { Color, ColorSelector } from "./color-selector"
 
 type AddRitualPopoverProps = {
     popoverControl: { isOpen: boolean, setIsOpen: Dispatch<SetStateAction<boolean>> }
@@ -23,6 +24,8 @@ const formSchema = z.object({
 export default function AddRitualPopover ({ popoverControl }: AddRitualPopoverProps) {
 
     const [isLoading, setIsLoading] = useState(false)
+    const [color, setColor] = useState<Color>("zinc")
+    console.log(color)
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -47,7 +50,10 @@ export default function AddRitualPopover ({ popoverControl }: AddRitualPopoverPr
                             <FormItem>
                                 <FormControl>
                                     <InputLabelWrapper label="RITUAL NAME">
-                                        <Input className="font-[family-name:var(--font-jb-mono)] h-14 text-xl text-center uppercase" type="text" required {...field} />
+                                        <Input autoFocus className="font-[family-name:var(--font-jb-mono)] h-14 text-xl uppercase" type="text" required {...field} />
+                                        <div className="absolute top-3 right-3">
+                                            <ColorSelector selectedColor={color} setColor={setColor} />
+                                        </div>
                                     </InputLabelWrapper>
                                 </FormControl>
                             </FormItem>

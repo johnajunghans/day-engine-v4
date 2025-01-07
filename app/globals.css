@@ -113,3 +113,41 @@ input:-webkit-autofill {
   transition: background-color 5000s ease-in-out 0s; /* Ensures smooth transitions */
   font-family: var(--font-jb-mono);
 }
+
+/* RITUAL COLORS */
+
+.rose-gradient {
+  background-image: linear-gradient(to right bottom, #4c0519, #600721, #740b29, #890e31, #9f1239);
+}
+
+.fuscia-gradient {
+  background-image: linear-gradient(to right bottom, #4a044e, #58085e, #670e6e, #77137e, #86198f);
+}
+
+.violet-gradient {
+  background-image: linear-gradient(to right bottom, #2e1065, #391479, #44198d, #4f1da1, #5b21b6);
+}
+
+.indigo-gradient {
+  background-image: linear-gradient(to right bottom, #1e1b4b, #242060, #2a2676, #302b8c, #3730a3);
+}
+
+.sky-gradient {
+  background-image: linear-gradient(to right bottom, #082f49, #093957, #094366, #094e75, #075985);
+}
+
+.emerald-gradient {
+  background-image: linear-gradient(to right bottom, #022c22, #02382b, #024534, #03523d, #065f46);
+}
+
+.amber-gradient {
+  background-image: linear-gradient(to right bottom, #451a03, #572309, #6a2c0c, #7e360d, #92400e);
+}
+
+.zinc-gradient {
+  background-image: linear-gradient(to right bottom, #09090b, #131314, #1a1a1c, #202023, #27272a);
+}
+
+.slate-gradient {
+  background-image: linear-gradient(to right bottom, #020617, #0d121f, #131a28, #182131, #1e293b);
+}

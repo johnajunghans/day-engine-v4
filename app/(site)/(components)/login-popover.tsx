@@ -83,7 +83,7 @@ const LoginPopover: FunctionComponent<LoginPopoverProps> = () => {
                                 <Button formAction={login} type="submit" variant="primary" onClick={() => setIsLoading(true)} className={isLoading ? "bg-opacity-50" : "bg-opacity-100"}>Login</Button>
                                 <Button onClick={onCreateAccount} disabled type="button" variant="secondary">Create an Account</Button>
                             </div>
-                            <Button onClick={onForgotPassword} disabled type="button" variant="text">Forgot Password?</Button>
+                            <Button onClick={onForgotPassword} type="button" variant="text">Forgot Password?</Button>
                         </div>
                     </form>
                 </Form>
