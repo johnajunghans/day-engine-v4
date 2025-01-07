@@ -31,7 +31,7 @@ const ThemeSelector: FunctionComponent<ThemeSelectorProps> = ({ align="end" }) =
             <DropdownMenuContent sideOffset={16} align={align}>
                 <DropdownMenuLabel>THEME</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuRadioGroup value={mode} onChange={setMode}>
+                <DropdownMenuRadioGroup value={mode} onValueChange={setMode}>
                     {modes.map(mode => (
                         <DropdownMenuRadioItem value={mode} key={mode}>{mode}</DropdownMenuRadioItem>
                     ))}

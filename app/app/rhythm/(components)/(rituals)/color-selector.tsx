@@ -1,28 +1,31 @@
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 interface ColorSelectorProps {
-    setColor: Dispatch<SetStateAction<Color>>
-    selectedColor: string
+    setSelectedColor: Dispatch<SetStateAction<Color>>
+    selectedColor: Color
+    isOpen: boolean
+    setIsOpen: Dispatch<SetStateAction<boolean>>
 }
 
 type Color = "rose" | "fuscia" | "violet" | "indigo" | "sky" | "emerald" | "amber" | "zinc" | "slate"
 
-const colors: Color[] = ["rose", "fuscia", "violet", "indigo", "sky", "emerald", "amber", "zinc", "slate"]
+const colors: Color[] = ["rose", "amber", "emerald", "sky", "indigo", "violet", "fuscia", "zinc", "slate"]
 
-function ColorSelector ({ setColor, selectedColor }: ColorSelectorProps) {
+function ColorSelector ({ setSelectedColor, selectedColor, isOpen, setIsOpen }: ColorSelectorProps) {
+
     return (
-        <DropdownMenu>
+        <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
             <DropdownMenuTrigger asChild>
-                <Button className={`w-8 h-8 ${selectedColor}-gradient`}></Button>
+                <Button className={`w-8 h-8 shadow-sm ${selectedColor}-gradient border border-background hover:border-de_orange_light_muted`}></Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" alignOffset={1000} sideOffset={-32}>
+            <DropdownMenuContent align="center" sideOffset={12}>
                 <DropdownMenuLabel>COLOR</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuRadioGroup value={selectedColor} onChange={setColor}>
+                <DropdownMenuRadioGroup value={selectedColor} onValueChange={setSelectedColor}>
                     {colors.map(color => (
-                        <DropdownMenuRadioItem value={color} key={color}><div className={`w-6 h-6 rounded-sm ${color}-gradient`} /></DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value={color} key={color}><div className={`w-6 h-6 shadow-sm rounded-sm ${color}-gradient`} /></DropdownMenuRadioItem>
                     ))}
                 </DropdownMenuRadioGroup>
             </DropdownMenuContent>

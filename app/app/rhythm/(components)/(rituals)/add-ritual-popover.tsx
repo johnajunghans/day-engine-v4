@@ -25,6 +25,8 @@ export default function AddRitualPopover ({ popoverControl }: AddRitualPopoverPr
 
     const [isLoading, setIsLoading] = useState(false)
     const [color, setColor] = useState<Color>("zinc")
+    const [isColorSelectorOpen, setIsColorSelectorOpen] = useState(false)
+
     console.log(color)
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -42,7 +44,7 @@ export default function AddRitualPopover ({ popoverControl }: AddRitualPopoverPr
                     <Plus className="stroke-de_orange !w-[18px] !h-[18px]" />
                 </Button>
             </PopoverTrigger>
-            <PopoverContent align="start" sideOffset={12} alignOffset={-82}>
+            <PopoverContent align="start" sideOffset={12} alignOffset={-82} className={`${isColorSelectorOpen ? "blur-[1px]" : "blur-0"} duration-75`}>
                 <PopoverHeader title="Create New Ritual" closePopover={popoverControl.setIsOpen} />
                 <Form {...form}>
                     <form className="w-[400px] flex flex-col gap-4 mt-1">
@@ -52,7 +54,7 @@ export default function AddRitualPopover ({ popoverControl }: AddRitualPopoverPr
                                     <InputLabelWrapper label="RITUAL NAME">
                                         <Input autoFocus className="font-[family-name:var(--font-jb-mono)] h-14 text-xl uppercase" type="text" required {...field} />
                                         <div className="absolute top-3 right-3">
-                                            <ColorSelector selectedColor={color} setColor={setColor} />
+                                            <ColorSelector selectedColor={color} setSelectedColor={setColor} isOpen={isColorSelectorOpen} setIsOpen={setIsColorSelectorOpen} />
                                         </div>
                                     </InputLabelWrapper>
                                 </FormControl>
