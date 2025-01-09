@@ -18,7 +18,7 @@ function ColorSelector ({ setSelectedColor, selectedColor, isOpen, setIsOpen }: 
     return (
         <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
             <DropdownMenuTrigger asChild>
-                <Button className={`w-8 h-8 shadow-sm ${selectedColor}-gradient border border-background hover:border-de_orange_light_muted`}></Button>
+                <Button className={`w-8 h-8 shadow-md ${selectedColor}-gradient border border-background hover:border-de_orange_light_muted`}></Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="center" sideOffset={12}>
                 <DropdownMenuLabel>COLOR</DropdownMenuLabel>

@@ -19,7 +19,6 @@ const ThemeSelector: FunctionComponent<ThemeSelectorProps> = ({ align="end" }) =
     const [color, setColor] = useState(currentColor);
 
     useEffect(() => {
-        console.log(color, mode)
         setTheme(`${mode} ${color}`)
     }, [mode, color, setTheme])
 

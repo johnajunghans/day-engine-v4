@@ -22,7 +22,7 @@ const NavTile: FunctionComponent<NavTileProps> = ({ name }) => {
 
     return (
         <Link href={`/app/${name}`}>
-            <div className={`flex flex-col justify-center items-center gap-1 w-20 h-20 bg-background border border-de_orange_light rounded-md ${pathname !== `/app/${name}` ? "opacity-40 hover:opacity-60" : "opacity-100"}`}>
+            <div className={`flex flex-col justify-center items-center gap-1 w-20 h-20 bg-background border border-de_orange_light rounded-lg ${pathname !== `/app/${name}` ? "opacity-40 hover:opacity-60" : "opacity-100"}`}>
                 <Image src={`/${name}.svg`} alt={name} width={40} height={40} />
                 <span className="text-de_orange text-sm tracking-widest">{name.toUpperCase()}</span>
             </div>
@@ -38,7 +38,7 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
     const navs = ["rhythm", "vision", "reflect"];
 
     return (  
-        <div className="h-[calc(100vh-16px)] flex flex-col justify-between items-center p-4 border border-de_orange_light_muted rounded-lg">
+        <div className="h-[calc(100vh-32px)] flex flex-col justify-between items-center p-4 border border-de_orange_light_muted rounded-xl">
             <div className="flex flex-col gap-4 items-center">
                 <Image src="/logo.png" alt="logo" width={125} height={125} className="animate-logo-spin" />
                 <div className="flex flex-col gap-3">

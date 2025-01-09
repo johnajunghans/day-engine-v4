@@ -27,8 +27,6 @@ export default function AddRitualPopover ({ popoverControl }: AddRitualPopoverPr
     const [color, setColor] = useState<Color>("zinc")
     const [isColorSelectorOpen, setIsColorSelectorOpen] = useState(false)
 
-    console.log(color)
-
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
