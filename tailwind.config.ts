@@ -63,6 +63,9 @@ export default {
   		},
 		animation: {
 			'logo-spin': 'spin 120s linear infinite'
+		},
+		transitionProperty: {
+			'border-color': 'border-color'
 		}
   	}
   },

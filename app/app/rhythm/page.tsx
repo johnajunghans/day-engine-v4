@@ -27,9 +27,9 @@ export default async function Rhythm() {
 
 
     return (
-        <ResizablePanelGroup direction="horizontal" className="flex-grow min-h-[calc(100vh-32px)] border border-de_orange_light_muted rounded-xl">
+        <ResizablePanelGroup direction="horizontal" className="flex-grow min-h-[calc(100vh-32px)]">
             <Rituals rituals={rituals} />
-            <ResizableHandle />
+            <ResizableHandle className="mx-2 h-[calc(100vh-64px)] translate-y-4 opacity-0" />
             <LabelledPanel title="WHEEL" minW="100vh">
 
             </LabelledPanel>

@@ -28,7 +28,7 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
                 <nav className="flex gap-2 items-center">
                     <Link href="/" className="flex items-center">
                         <Image src="/logo.png" alt="logo" width={48} height={48} className="animate-logo-spin" />
-                        <span className={`${pathname === "/" ? "text-de_orange" : "text-white_muted hover:text-white/80" }`}>Day Engine</span>
+                        <h3 className={`text-xl h-12 leading-[46px] ${pathname === "/" ? "text-de_orange" : "text-white_muted hover:text-white/80" }`}>Day Engine</h3>
                     </Link>
                     <Separator orientation="vertical" className="h-8" />
                     {links.map(link => (

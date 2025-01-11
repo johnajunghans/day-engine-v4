@@ -2,7 +2,7 @@ type DayOfWeek = "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "S
 
 type Ritual = {
     id: number,
-    created_on: string,
+    created_at: string,
     last_updated_on: string,
     user_id: string,
     name: string,
@@ -13,7 +13,7 @@ type Ritual = {
 type RitualInstance = {
     id: number,
     user_id: string,
-    created_on: string,
+    created_at: string,
     name: string,
     color: string,
     
