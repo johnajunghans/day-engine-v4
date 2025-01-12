@@ -13,10 +13,8 @@ type Ritual = {
 type RitualInstance = {
     id: number,
     user_id: string,
+    ritual_id: number,
     created_at: string,
-    name: string,
-    color: string,
-    
     days: DayOfWeek[],
     start_time: string,
     end_time: string
@@ -52,5 +50,6 @@ type RitualInstance = {
 
 export {
     type DayOfWeek,
-    type Ritual
+    type Ritual,
+    type RitualInstance
 }

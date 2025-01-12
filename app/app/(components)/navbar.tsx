@@ -39,7 +39,7 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
     const navs = ["rhythm", "vision", "reflect"];
 
     return (  
-        <div className="h-[calc(100vh-32px)] flex flex-col justify-between items-center p-4 border border-de_orange_light_muted rounded-xl">
+        <div className="h-[calc(100vh-36px)] flex flex-col justify-between items-center pb-4 pt-2 px-4 mt-9 border-t border-de_orange_light_muted">
             <div className="flex flex-col gap-4 items-center">
                 <Image src="/logo.png" alt="logo" width={125} height={125} className="animate-logo-spin" />
                 <div className="flex flex-col gap-3">

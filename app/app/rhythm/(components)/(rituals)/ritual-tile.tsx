@@ -23,7 +23,7 @@ export default function RitualTile({ ritual }: { ritual: Ritual }) {
     }
 
     return (
-        <div id={`ritual-${name}-tile`} className={`w-[90%] px-3 py-2 bg-background border ${isExpanded ? "border-white_muted/40" : "border-white_muted/20"} transition-[border-color] rounded-lg flex flex-col gap-1`}>
+        <div id={`ritual-${name}-tile`} className={`w-full px-3 py-2 bg-background border ${isExpanded ? "border-white_muted/40" : "border-white_muted/20"} transition-[border-color] rounded-lg flex flex-col gap-1`}>
             <div className="flex justify-between items-center">
                 <div className="flex gap-2 items-center">
                     {editName 

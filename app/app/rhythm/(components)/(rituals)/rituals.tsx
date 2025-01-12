@@ -15,8 +15,8 @@ export default function Rituals({ rituals }: RitualProps) {
     const [addRitualPopoverOpen, setAddRitualPopoverOpen] = useState(false)
 
     return (
-        <LabelledPanel title="RITUALS" popover={<AddRitualPopover popoverControl={{ isOpen: addRitualPopoverOpen, setIsOpen: setAddRitualPopoverOpen }} />}>
-            <div className={`flex flex-col gap-4 items-center p-4 ${addRitualPopoverOpen ? "blur-sm" : ""}`}>
+        <LabelledPanel title="RITUALS" size={34} minSize={20} maxSize={50} popover={<AddRitualPopover popoverControl={{ isOpen: addRitualPopoverOpen, setIsOpen: setAddRitualPopoverOpen }} />}>
+            <div className={`flex flex-col gap-4 items-center p-6 ${addRitualPopoverOpen ? "blur-sm" : ""}`}>
                 {rituals.map(ritual => (
                     <RitualTile key={ritual.id} ritual={ritual} />
                 ))}

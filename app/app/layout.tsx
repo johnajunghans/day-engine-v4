@@ -15,7 +15,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
     }
 
     return (
-        <div className="flex gap-4 p-4 font-[family-name:var(--font-philosopher)]">
+        <div className="flex font-[family-name:var(--font-philosopher)]">
             <Navbar />
             { children }
         </div>
