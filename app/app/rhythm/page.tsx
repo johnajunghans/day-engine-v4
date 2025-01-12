@@ -3,7 +3,7 @@ import Rituals from "./(components)/(rituals)/rituals";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { PostgrestResponse } from "@supabase/supabase-js";
-import { Ritual, RitualInstance } from "@/lib/types/rhythm-types";
+import { MappableInstances, Ritual, RitualInstance } from "@/lib/types/rhythm-types";
 import WheelMain from "./(components)/(wheel)/wheel-main";
 
 export default async function Rhythm() {
@@ -31,7 +31,10 @@ export default async function Rhythm() {
         const ritualIds = rituals.map(ritual => ritual.id);
         const { data, error }: PostgrestResponse<RitualInstance> = await supabase
             .from('Ritual_Instances')
-            .select('*')
+            .select(`
+                *,
+                Rituals(name, color)
+            `)
             .in('ritual_id', ritualIds)
         
         if (!data || error) {
@@ -42,14 +45,35 @@ export default async function Rhythm() {
         instances = data
     }
 
-    
+    // Create mappable instances object if there are ritual instances
+    // ASSUMING THAT NAME AND COLOR PROPERTY ARE JOINED TO RITUAL INSTANCES FROM RITUALS
+    const mappableInstances: MappableInstances = {
+        Monday: [],
+        Tuesday: [],
+        Wednesday: [],
+        Thursday: [],
+        Friday: [],
+        Saturday: [],
+        Sunday: [],
+        Daily: []
+    }
+    if (instances.length > 0) {
+        instances.forEach(instance => {
+            instance.days.forEach(day => {
+                mappableInstances[day].push(instance)
+            })
+            if (instance.days.length === 7) {
+                mappableInstances["Daily"].push(instance)
+            }
+        })
+    }
 
 
     return (
         <ResizablePanelGroup direction="horizontal" className="flex-grow h-screen border-l border-de_orange_light_muted">
             <Rituals rituals={rituals} />
             <ResizableHandle className="h-screen bg-de_orange_light_muted" />
-            <WheelMain ritualInstances={instances} />
+            <WheelMain instances={mappableInstances} />
         </ResizablePanelGroup>
     )
 }

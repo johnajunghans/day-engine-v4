@@ -1,16 +1,17 @@
 'use client'
 
 import LabelledPanel from "@/app/app/(components)/labelled-panel";
-import { RitualInstance } from "@/lib/types/rhythm-types";
+import { MappableInstances } from "@/lib/types/rhythm-types";
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { debounce, isEqual } from "lodash";
 import WheelOutline from "./wheel-outline";
+import WheelFunction from "./wheel-function";
 
 interface WheelMainProps {
-    ritualInstances: RitualInstance[]
+    instances: MappableInstances
 }
 
-export default function WheelMain({ ritualInstances }: WheelMainProps) {
+export default function WheelMain({ instances }: WheelMainProps) {
 
     const panelRef = useRef<HTMLDivElement>(null)
     const [panelDimensions, setPanelDimensions] = useState({ width: 0, height: 0 })
@@ -31,13 +32,14 @@ export default function WheelMain({ ritualInstances }: WheelMainProps) {
     }, [handleWheelResize])
 
     const svgSize = panelDimensions.height >= panelDimensions.width ? panelDimensions.width : panelDimensions.height;
-    console.log(svgSize, panelDimensions)
+    const center = svgSize / 2
     
     return (
         <LabelledPanel title="WHEEL" ref={panelRef} onResize={debounce(() => handleWheelResize(), 500)} centerContents>
-            <svg width={svgSize} height={svgSize}>
-                {svgSize && <WheelOutline svgSize={svgSize} />}
-            </svg>
+            {svgSize && <svg width={svgSize} height={svgSize} overflow="visible" className="mx-2">
+                <WheelOutline svgSize={svgSize} center={center} />
+                <WheelFunction svgSize={svgSize} instances={instances} center={center} />
+            </svg>}
         </LabelledPanel>
     )
 }

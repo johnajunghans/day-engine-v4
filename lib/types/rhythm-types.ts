@@ -1,4 +1,6 @@
-type DayOfWeek = "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday"
+import { Color } from "@/app/app/rhythm/(components)/(rituals)/color-selector"
+
+type DayOfWeek = "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday" | "Daily"
 
 type Ritual = {
     id: number,
@@ -16,6 +18,7 @@ type RitualInstance = {
     ritual_id: number,
     created_at: string,
     days: DayOfWeek[],
+    Rituals: { name: string, color: Color }
     start_time: string,
     end_time: string
 }
@@ -28,15 +31,16 @@ type RitualInstance = {
 //     end_time: string
 // }
 
-// interface MappableInstancesObject {
-//     Monday: MappableInstance[],
-//     Tuesday: MappableInstance[],
-//     Wednesday: MappableInstance[],
-//     Thursday: MappableInstance[],
-//     Friday: MappableInstance[],
-//     Saturday: MappableInstance[],
-//     Sunday: MappableInstance[]
-// }
+type MappableInstances = {
+    Monday: RitualInstance[],
+    Tuesday: RitualInstance[],
+    Wednesday: RitualInstance[],
+    Thursday: RitualInstance[],
+    Friday: RitualInstance[],
+    Saturday: RitualInstance[],
+    Sunday: RitualInstance[],
+    Daily: RitualInstance[]
+}
 
 // const mappableInstances: MappableInstancesObject = {
 //     Monday: [],
@@ -51,5 +55,6 @@ type RitualInstance = {
 export {
     type DayOfWeek,
     type Ritual,
-    type RitualInstance
+    type RitualInstance,
+    type MappableInstances
 }
