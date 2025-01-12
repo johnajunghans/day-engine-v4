@@ -1,9 +1,14 @@
-import Landing from "./(site)/(landing)/landing";
+import { createClient } from "@/lib/supabase/server";
+import Navbar from "./(site)/(components)/navbar";
 
-export default function Home() {
+export default async function Home() {
+
+  const supabase = await createClient()
+  const { data } = await supabase.auth.getSession()
+
   return (
     <div className="font-[family-name:var(--font-philosopher)]">
-      <Landing />
+      <Navbar session={data.session} />
     </div>
   );
 }

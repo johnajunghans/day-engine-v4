@@ -6,6 +6,7 @@ import { UserCircle, LogOut } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ThemeSelector from "@/components/common/theme-selector";
+import Logout from "@/app/(auth)/logout/logout";
 
 interface NavbarProps {
     
@@ -50,7 +51,7 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
             <div className="flex justify-between w-full">
                 <ThemeSelector align="start" />
                 <UserCircle className={footerIconStyles} />
-                <LogOut className={footerIconStyles} />
+                <Logout />
             </div>
         </div>
     );

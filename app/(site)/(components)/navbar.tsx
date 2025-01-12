@@ -8,12 +8,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FunctionComponent } from "react";
 import LoginPopover from "./login-popover";
+import { Session } from "@supabase/supabase-js";
+import { User } from "lucide-react";
 
 interface NavbarProps {
-    
+    session: Session | null
 }
 
-const Navbar: FunctionComponent<NavbarProps> = () => {
+const Navbar: FunctionComponent<NavbarProps> = ({ session }) => {
 
     const pathname = usePathname();
 
@@ -21,6 +23,8 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
         { name: "Philosophy", href: "/philosophy" },
         { name: "Blog", href: "/blog" }
     ]
+
+    
 
     return (
         <div className="flex gap-2 fixed m-2 w-[calc(100vw-16px)]">
@@ -36,16 +40,19 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
                     ))}
                 </nav>
                 <div className="flex items-center">
-                    <div className="flex gap-1 items-center">
+                    <div className="flex gap-2 items-center">
                         <ThemeSelector align="end" />
                         <Separator orientation="vertical" className="h-8" />
-                        <LoginPopover />
+                        {session 
+                            ? <Button variant="text" className="pl-1 pr-4"><span>Account</span><User /></Button> 
+                            : <LoginPopover />
+                        }
                     </div>
-                    
                 </div>
-                
             </div>
-            <Button variant="primary" className="h-12 p-2 text-white/90 bg-de_orange/50 border border-de_orange/75 hover:bg-de_orange/55 hover:border-de_orange/90">Try for Free</Button>
+                <Link href={session ? '/app' : '/'}>
+                    <Button variant="primary" className="h-12 p-2 text-white/90 bg-de_orange/50 border border-de_orange/75 hover:bg-de_orange/55 hover:border-de_orange/90">{session ? "Go to App" : "Try for Free"}</Button>
+                </Link>
         </div> 
         
     );
