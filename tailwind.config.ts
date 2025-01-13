@@ -65,7 +65,8 @@ export default {
 			'logo-spin': 'spin 120s linear infinite'
 		},
 		transitionProperty: {
-			'border-color': 'border-color'
+			'border-color': 'border-color',
+			'blur': 'filter, blur'
 		}
   	}
   },

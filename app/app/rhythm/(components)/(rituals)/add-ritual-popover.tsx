@@ -1,19 +1,17 @@
 import { Button } from "@/components/ui/button"
 import InputLabelWrapper from "@/components/ui/custom/input-label-wrapper"
-import PopoverHeader from "@/components/ui/custom/popover-header"
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Textarea } from "@/components/ui/textarea"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Plus } from "lucide-react"
-import { Dispatch, SetStateAction, useState } from "react"
+import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Color, ColorSelector } from "./color-selector"
+import { AddPopoverWrapper, PopoverControl } from "@/components/ui/custom/add-popover-wrapper"
 
 type AddRitualPopoverProps = {
-    popoverControl: { isOpen: boolean, setIsOpen: Dispatch<SetStateAction<boolean>> }
+    popoverControl: PopoverControl
 }
 
 const formSchema = z.object({
@@ -59,15 +57,8 @@ export default function AddRitualPopover ({ popoverControl }: AddRitualPopoverPr
     }
 
     return (
-        <Popover open={popoverControl.isOpen} onOpenChange={popoverControl.setIsOpen}>
-            <PopoverTrigger asChild>
-                <Button variant="icon" size="icon">
-                    <Plus className="stroke-de_orange !w-[18px] !h-[18px]" />
-                </Button>
-            </PopoverTrigger>
-            <PopoverContent align="start" sideOffset={12} alignOffset={-82} className={`${isColorSelectorOpen ? "blur-[1px]" : "blur-0"} duration-75`}>
-                <PopoverHeader title="Create New Ritual" closePopover={popoverControl.setIsOpen} />
-                <Form {...form}>
+        <AddPopoverWrapper popoverControl={popoverControl} title="Create New Ritual" isContentBlurred={isColorSelectorOpen}>
+            <Form {...form}>
                     <form onSubmit={form.handleSubmit(handleAddRitual)} className="w-[400px] flex flex-col gap-4 mt-1">
                         <FormField control={form.control} name="name" render={({ field }) => (
                             <FormItem>
@@ -96,7 +87,6 @@ export default function AddRitualPopover ({ popoverControl }: AddRitualPopoverPr
                         </div>
                     </form>
                 </Form>
-            </PopoverContent>
-        </Popover>
+        </AddPopoverWrapper>
     )
 }

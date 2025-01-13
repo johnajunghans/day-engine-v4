@@ -16,15 +16,12 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     // Define state for theme and set theme
     // Included function as initial value which searches localStorage for potential value
-    // THIS CODE DOES NOT WORK...maybe take a look at it? It's maki
 
     const [theme, setTheme] = useState<Theme>(() => {
         if (typeof window !== undefined) {
             return (localStorage.getItem('theme') as Theme) || "dark default"
         } else return "dark default"
     });
-
-    // const [theme, setTheme] = useState<Theme>("dark default")
 
     useEffect(() => {
         localStorage.setItem('theme', theme);

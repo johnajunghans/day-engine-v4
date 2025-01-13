@@ -84,7 +84,7 @@ export default function WheelFunction({ svgSize, instances, center, outerCircleR
                 </linearGradient>
             </defs>
             {instances[day].map(instance => (
-                <RitualInstanceSector key={instance.id} svgSize={svgSize} instance={instance} center={center} outerRadius={outerCircleRadius} />
+                <RitualInstanceSector key={instance.id} instance={instance} center={center} outerRadius={outerCircleRadius} />
             ))}
             <WheelDaySelector svgSize={svgSize} center={center} day={day} setDay={setDay} days={days} />
         </>

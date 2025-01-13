@@ -6,12 +6,15 @@ import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { debounce, isEqual } from "lodash";
 import WheelOutline from "./wheel-outline";
 import WheelFunction from "./wheel-function";
+import AddInstancePopover from "./add-instance-popover";
 
 interface WheelMainProps {
     instances: MappableInstances
 }
 
 export default function WheelMain({ instances }: WheelMainProps) {
+
+    const [isPopoverOpen, setIsPopoverOpen] = useState(false)
 
     const panelRef = useRef<HTMLDivElement>(null)
     const [panelDimensions, setPanelDimensions] = useState({ width: 0, height: 0 })
@@ -36,8 +39,8 @@ export default function WheelMain({ instances }: WheelMainProps) {
     const outerCircleRadius = svgSize * 0.45
     
     return (
-        <LabelledPanel title="WHEEL" ref={panelRef} onResize={debounce(() => handleWheelResize(), 500)} centerContents>
-            {svgSize && <svg width={svgSize} height={svgSize} overflow="visible" className="mx-2">
+        <LabelledPanel title="WHEEL" ref={panelRef} onResize={debounce(() => handleWheelResize(), 500)} centerContents popover={<AddInstancePopover popoverControl={{ isOpen: isPopoverOpen, setIsOpen: setIsPopoverOpen}} />}>
+            {svgSize && <svg width={svgSize} height={svgSize} overflow="visible" className={`mx-2 ${isPopoverOpen ? "blur-sm" : "blur-0"} transition-[blur]`}>
                 <WheelOutline svgSize={svgSize} center={center} outerCircleRadius={outerCircleRadius} />
                 <WheelFunction svgSize={svgSize} instances={instances} center={center} outerCircleRadius={outerCircleRadius} />
             </svg>}
