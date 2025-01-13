@@ -11,14 +11,14 @@ function calcSectCoordinates(sa: number, ea: number, c: number, r: number, br: n
     // Params: start angle, end angle, center, radius, border radius, spring point
     
     // Adjusted Radius
-    const ar = r - br
+    const ar = r - br - 1
     // Adjusted Angle
     const aa = br * 360 / (2 * Math.PI * r)
 
     return {
         oS: polarToRect(c, c, ar, sa),
-        iS: polarToRect(c, c, r, sa + aa),
-        iE: polarToRect(c, c, r, ea - aa),
+        iS: polarToRect(c, c, r - 1, sa + aa),
+        iE: polarToRect(c, c, r - 1, ea - aa),
         oE: polarToRect(c, c, ar, ea)
     }
 }
@@ -29,7 +29,7 @@ function avg(a: number, b: number) {
 
 export default function RitualInstanceSector({ instance, center, outerRadius }: RitualInstanceSectorProps) {
 
-    const br = 12
+    const br = 10
     const sp = 6
 
     // Calculate start angle and end angle (in degrees)
