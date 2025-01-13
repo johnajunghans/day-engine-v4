@@ -33,12 +33,13 @@ export default function WheelMain({ instances }: WheelMainProps) {
 
     const svgSize = panelDimensions.height >= panelDimensions.width ? panelDimensions.width : panelDimensions.height;
     const center = svgSize / 2
+    const outerCircleRadius = svgSize * 0.45
     
     return (
         <LabelledPanel title="WHEEL" ref={panelRef} onResize={debounce(() => handleWheelResize(), 500)} centerContents>
             {svgSize && <svg width={svgSize} height={svgSize} overflow="visible" className="mx-2">
-                <WheelOutline svgSize={svgSize} center={center} />
-                <WheelFunction svgSize={svgSize} instances={instances} center={center} />
+                <WheelOutline svgSize={svgSize} center={center} outerCircleRadius={outerCircleRadius} />
+                <WheelFunction svgSize={svgSize} instances={instances} center={center} outerCircleRadius={outerCircleRadius} />
             </svg>}
         </LabelledPanel>
     )

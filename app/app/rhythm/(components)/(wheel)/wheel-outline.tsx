@@ -2,12 +2,13 @@ import { polarToRect } from "@/lib/functions/polar-coordinate-functions";
 
 interface WheelOutline {
     svgSize: number,
-    center: number
+    center: number,
+    outerCircleRadius: number
 }
 
-export default function WheelOutline({ svgSize, center }: WheelOutline) {
+export default function WheelOutline({ svgSize, center, outerCircleRadius }: WheelOutline) {
 
-    const outerCircleRadius = svgSize * 0.45
+    
 
     const rotations = [0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 225, 240, 255, 270, 285, 300, 315, 330, 345];
     const timeMarkers = ["6 AM", "7 AM", "8 AM", "9 AM", "10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM", "4 PM", "5 PM", "6 PM", "7 PM", "8 PM", "9 PM", "10 PM", "11 PM", "12 AM", "1 AM", "2 AM", "3 AM", "4 AM", "5 AM"];
