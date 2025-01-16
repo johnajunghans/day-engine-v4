@@ -9,11 +9,12 @@ interface WheelDaySelectorProps {
     center: number
     setDay: Dispatch<SetStateAction<DayOfWeek>>
     days: DayOfWeek[]
+    innerCircleRadius: number
 }
 
-export default function WheelDaySelector({ svgSize, day: activeDay, center, setDay, days }: WheelDaySelectorProps) {
+export default function WheelDaySelector({ svgSize, day: activeDay, center, setDay, days, innerCircleRadius }: WheelDaySelectorProps) {
 
-    const innerCircleRadius = svgSize * 0.16
+    
     
     // Time marker component
     function Text({ day, index }: { day: DayOfWeek,index: number }) {

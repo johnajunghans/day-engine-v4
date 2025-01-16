@@ -69,6 +69,7 @@ export default function AddInstancePopover({ popoverControl }: AddInstancePopove
                 title: `New Instance of ${ritualInfo.name}`,
                 description: `From ${newInstance.start_time} to ${newInstance.end_time}`
             })
+            form.reset();
             popoverControl.setIsOpen(false)
         } else {
             const { error }: { error: { message: string, code: string }} = await res.json();

@@ -3,7 +3,6 @@
 import { useState } from "react"
 import AddRitualPopover from "./add-ritual-popover"
 import LabelledPanel from "@/app/app/(components)/labelled-panel"
-import { Ritual } from "@/lib/types/rhythm-types"
 import RitualTile from "./ritual-tile"
 import { Accordion } from "@/components/ui/accordion"
 import { useRituals } from "@/context/rituals-provider"

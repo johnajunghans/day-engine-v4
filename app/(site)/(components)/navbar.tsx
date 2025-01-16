@@ -31,7 +31,7 @@ const Navbar: FunctionComponent<NavbarProps> = ({ session }) => {
             <div className="w-full h-12 flex justify-between items-center rounded-md bg-white/10 border border-white/15 backdrop-blur-sm">
                 <nav className="flex gap-2 items-center">
                     <Link href="/" className="flex items-center">
-                        <Image src="/logo.png" alt="logo" width={48} height={48} className="animate-logo-spin" />
+                        <Image priority src="/logo.png" alt="logo" width={48} height={48} className="animate-logo-spin" />
                         <h3 className={`text-xl h-12 leading-[46px] ${pathname === "/" ? "text-de_orange" : "text-white_muted hover:text-white/80" }`}>Day Engine</h3>
                     </Link>
                     <Separator orientation="vertical" className="h-8" />

@@ -56,18 +56,18 @@ export default function AddRitualPopover ({ popoverControl }: AddRitualPopoverPr
         })
 
         if (res.ok) {
-            const ritual: Ritual = await res.json()
+            const { data: ritual }: { data: Ritual } = await res.json()
             ritualDispatch({ type: "INSERT", payload: ritual })
             toast({
                 title: "Ritual Created",
                 description: `${ritual.name}`
             })
         } else {
-            const error: Error = await res.json()
-            console.log("Error creating new Ritual", error)
+            const { error }: { error: { message: string, code: string }} = await res.json();
+            console.log(error)
             toast({
-                title: "Ritual Created",
-                description: `${error.message}`
+                title: "Error creating new Ritual Instance",
+                description: error.message 
             })
         }
         popoverControl.setIsOpen(false)
