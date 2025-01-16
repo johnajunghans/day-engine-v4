@@ -82,7 +82,7 @@ export default function AddRitualPopover ({ popoverControl }: AddRitualPopoverPr
                             <FormItem>
                                 <FormControl>
                                     <InputLabelWrapper htmlFor="name" label="RITUAL NAME">
-                                        <Input id="name" autoFocus className="font-[family-name:var(--font-jb-mono)] h-14 text-xl uppercase" type="text" required {...field} />
+                                        <Input id="name" autoFocus className="font-[family-name:var(--font-jb-mono)] h-14 text-xl" type="text" required {...field} />
                                         <div className="absolute top-3 right-3">
                                             <ColorSelector selectedColor={color} setSelectedColor={setColor} isOpen={isColorSelectorOpen} setIsOpen={setIsColorSelectorOpen} />
                                         </div>
