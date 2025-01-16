@@ -2,18 +2,20 @@
  
 import * as React from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Period, display12HourValue, setDateByType } from "./time-picker-utils";
+import { Period, Time, display12HourValue, setTimeByType } from "./time-picker-utils";
  
 export interface PeriodSelectorProps {
     period: Period;
     setPeriod: (m: Period) => void;
-    date: Date | undefined;
-    setDate: (date: Date | undefined) => void;
+    time: Time | undefined;
+    setTime: (time: Time | undefined) => void;
     onRightFocus?: () => void;
     onLeftFocus?: () => void;
+    id: string;
+    name: string;
 }
  
-export const TimePeriodSelect = React.forwardRef<HTMLButtonElement, PeriodSelectorProps>(({ period, setPeriod, date, setDate, onLeftFocus, onRightFocus }, ref) => {
+export const TimePeriodSelect = React.forwardRef<HTMLButtonElement, PeriodSelectorProps>(({ id, name, period, setPeriod, time, setTime, onLeftFocus, onRightFocus }, ref) => {
     const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
         if (e.key === "ArrowRight") onRightFocus?.();
         if (e.key === "ArrowLeft") onLeftFocus?.();
@@ -26,17 +28,16 @@ export const TimePeriodSelect = React.forwardRef<HTMLButtonElement, PeriodSelect
          * trigger an update whenever the user switches between AM and PM;
          * otherwise user must manually change the hour each time
          */
-        if (date) {
-            const tempDate = new Date(date);
-            const hours = display12HourValue(date.getHours());
-            setDate(setDateByType(tempDate, hours.toString(), "12hours", period === "AM" ? "PM" : "AM"));
+        if (time) {;
+            const hours = display12HourValue(Number(time.slice(0,2)));
+            setTime(setTimeByType(time, hours, "12hours", period === "AM" ? "PM" : "AM"));
         }
     };
  
     return (
-        <div className="flex h-10 items-center">
+        <div className="flex h-12 items-center">
             <Select value={period} onValueChange={(value: Period) => handleValueChange(value)}>
-                <SelectTrigger ref={ref} className="w-[65px] focus:bg-accent focus:text-accent-foreground" onKeyDown={handleKeyDown}>
+                <SelectTrigger id={id} name={name} ref={ref} className="w-14 px-1 h-12 text-white_muted focus:text-foreground focus-visible:text-foreground border-none font-[family-name:var(--font-jb-mono)] text-xl" onKeyDown={handleKeyDown}>
                     <SelectValue />
                 </SelectTrigger>
                 <SelectContent>

@@ -86,67 +86,78 @@ export function isValidHour(value: string) {
     return getValidArrowNumber(value, { min: 0, max: 59, step });
   }
    
-  export function setMinutes(date: Date, value: string) {
+  export function setMinutes(time: Time, value: string): Time {
     const minutes = getValidMinuteOrSecond(value);
-    date.setMinutes(parseInt(minutes, 10));
-    return date;
+    const hours = time.slice(0,2);
+    return `${hours}:${minutes}`
   }
    
-  export function setSeconds(date: Date, value: string) {
-    const seconds = getValidMinuteOrSecond(value);
-    date.setSeconds(parseInt(seconds, 10));
-    return date;
-  }
+  // export function setSeconds(date: Date, value: string) {
+  //   const seconds = getValidMinuteOrSecond(value);
+  //   date.setSeconds(parseInt(seconds, 10));
+  //   return date;
+  // }
    
-  export function setHours(date: Date, value: string) {
+  export function setHours(time: Time, value: string) {
     const hours = getValidHour(value);
-    date.setHours(parseInt(hours, 10));
-    return date;
+    const minutes = time.slice(3,5)
+    return `${hours}:${minutes}`;
   }
    
-  export function set12Hours(date: Date, value: string, period: Period) {
-    const hours = parseInt(getValid12Hour(value), 10);
-    const convertedHours = convert12HourTo24Hour(hours, period);
-    date.setHours(convertedHours);
-    return date;
+  export function set12Hours(time: Time, value: string, period: Period) {
+    const hours = getValid12Hour(value);
+    const minutes = time.slice(3,5);
+    console.log(hours)
+    return `${hours}:${minutes}${period}`;
   }
+
+  // export function getCurrentTime(hour: "12" | "24"): Time {
+  //   const now = new Date()
+  //   const hours = now.getHours()
+  //   const minutes = now.getMinutes()
+  //   return hour === "12" ? `${hours > 12 ? hours - 12 : hours}:${minutes}` : hour === "24" ? `${hours}:${minutes}` : "00:00"
+  // }
    
+  // export type Hour12 = "00" | "01" | "02" | "03" | "04" | "05" | "06" | "07" | "08" | "09" | "10" | "11" | "12";
+  // export type Hour24 = "00" | "01" | "02" | "03" | "04" | "05" | "06" | "07" | "08" | "09" | "10" | "11" | "12" | "13" | "14" | "15" | "16" | "17" | "18" | "19" | "20" | "21" | "22" | "23";
+  // export type Minute = `${0 | 1 | 2 | 3 | 4 | 5}${0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9}`
+  // export type Time12 = `${Hour12}:${Minute}`
+  // export type Time24 = `${Hour24}:${Minute}`
+  export type HourOrMin = string
+  export type Time = string
   export type TimePickerType = "minutes" | "seconds" | "hours" | "12hours";
   export type Period = "AM" | "PM";
    
-  export function setDateByType(
-    date: Date,
+  export function setTimeByType(
+    time: Time,
     value: string,
     type: TimePickerType,
     period?: Period
   ) {
     switch (type) {
       case "minutes":
-        return setMinutes(date, value);
-      case "seconds":
-        return setSeconds(date, value);
+        return setMinutes(time, value);
       case "hours":
-        return setHours(date, value);
+        return setHours(time, value);
       case "12hours": {
-        if (!period) return date;
-        return set12Hours(date, value, period);
+        if (!period) return time;
+        return set12Hours(time, value, period);
       }
       default:
-        return date;
+        return time;
     }
   }
    
-  export function getDateByType(date: Date, type: TimePickerType) {
+  export function getTimeByType(time: Time, type: TimePickerType) {
     switch (type) {
       case "minutes":
-        return getValidMinuteOrSecond(String(date.getMinutes()));
-      case "seconds":
-        return getValidMinuteOrSecond(String(date.getSeconds()));
+        return getValidMinuteOrSecond(time.slice(3,5));
+      // case "seconds":
+      //   return getValidMinuteOrSecond(String(date.getSeconds()));
       case "hours":
-        return getValidHour(String(date.getHours()));
+        return getValidHour(time.slice(0,2));
       case "12hours":
-        const hours = display12HourValue(date.getHours());
-        return getValid12Hour(String(hours));
+        return getValid12Hour(time.slice(0,2));
       default:
         return "00";
     }

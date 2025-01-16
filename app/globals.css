@@ -60,6 +60,16 @@ body {
     --chart-5: 340 75% 55%;
   }
 
+  html[data-theme*="light"] {
+    --foreground: #000000;
+  }
+
+  html[data-theme="light default"] {
+    --backdrop: #F5F5F5;
+    --background: rgba(0,0,0,0.4);
+    --de-orange-light-muted: #D9D9D9;
+  }
+
   html[data-theme*="dark"] {
     --foreground: #FFFFFF;
   }
@@ -106,12 +116,32 @@ body {
   opacity: 1;
 }
 
+/* STYLES FOR HANDLING CHANGES TO BROWSER AUTOMATIONS */
+
 input:-webkit-autofill {
   background-color: transparent;
   -webkit-text-fill-color: white; /* Replace 'black' with your desired text color */
   color: white;
   transition: background-color 5000s ease-in-out 0s; /* Ensures smooth transitions */
   font-family: var(--font-jb-mono);
+}
+
+/* For most modern browsers */
+input[type="time"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+/* For Firefox */
+input[type="time"]::-moz-focus-inner {
+  border: 0;
+}
+
+/* To ensure consistency */
+input[type="time"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 /* RITUAL COLORS */

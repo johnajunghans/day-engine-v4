@@ -6,6 +6,7 @@ import { PostgrestResponse } from "@supabase/supabase-js";
 import { MappableInstances, Ritual, RitualInstance } from "@/lib/types/rhythm-types";
 import WheelMain from "./(components)/(wheel)/wheel-main";
 import { RitualsProvider } from "@/context/rituals-provider";
+import { RitualInstancesProvider } from "@/context/ritual-instances-provider";
 
 export default async function Rhythm() {
 
@@ -73,9 +74,11 @@ export default async function Rhythm() {
     return (
         <ResizablePanelGroup direction="horizontal" className="flex-grow h-screen border-l border-de_orange_light_muted">
             <RitualsProvider initialValue={rituals}>
-                <Rituals rituals={rituals} />
-                <ResizableHandle className="h-screen bg-de_orange_light_muted" />
-                <WheelMain instances={mappableInstances} />
+                <RitualInstancesProvider initialValue={mappableInstances}>
+                    <Rituals />
+                    <ResizableHandle className="h-screen bg-de_orange_light_muted" />
+                    <WheelMain />
+                </RitualInstancesProvider>
             </RitualsProvider>
         </ResizablePanelGroup>
     )

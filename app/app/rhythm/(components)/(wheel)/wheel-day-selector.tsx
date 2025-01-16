@@ -13,8 +13,9 @@ interface WheelDaySelectorProps {
 
 export default function WheelDaySelector({ svgSize, day: activeDay, center, setDay, days }: WheelDaySelectorProps) {
 
-    const innerCircleRadius = svgSize * 0.17
+    const innerCircleRadius = svgSize * 0.16
     
+    // Time marker component
     function Text({ day, index }: { day: DayOfWeek,index: number }) {
 
         const angle = (51.429 * index - 12.857 - 51.429)
@@ -26,14 +27,16 @@ export default function WheelDaySelector({ svgSize, day: activeDay, center, setD
                 y={xy.y}
                 textAnchor="middle"
                 alignmentBaseline="middle"
-                className={`${activeDay === day ? "fill-background font-bold" : "fill-de_orange_light"} antialiased text-lg pointer-events-none`}
+                className={`${activeDay === day ? "fill-backdrop font-bold" : "fill-de_orange_light"} antialiased text-lg pointer-events-none`}
             >{day.slice(0,3)}</text>
         )
     }
 
     return (
         <g>
-            <circle cx={center} cy={center} r={innerCircleRadius} className="fill-background drop-shadow-[0px_5px_6px_rgba(0,0,0,0.4)]" />
+            <circle cx={center} cy={center} r={innerCircleRadius} className="fill-backdrop stroke-de_orange_light_muted" />
+
+            {/* Path buttons */}
             {days.map((day, index) => (
                 <path 
                     key={day}
@@ -50,19 +53,25 @@ export default function WheelDaySelector({ svgSize, day: activeDay, center, setD
                     className={`${activeDay === day ? "fill-de_orange_light" : "fill-white/0 hover:fill-white/5"} duration-150 transition-colors focus:outline-none focus-visible:outline-none focus-visible:stroke-de_orange`}
                 />
             ))}
+
+            {/* Lines separating path buttons */}
             {[0,1,2,3,4,5,6].map((num) => (
                 <path 
                     key={num} 
                     d={`M ${center} ${center} L ${center} ${center+innerCircleRadius}`} 
                     style={{transform: `rotate(${51.429 * num}deg)`, transformOrigin: `${center}px ${center}px`}}
-                    className="stroke-de_orange_light" 
+                    className="stroke-de_orange_light_muted" 
                 />
             ))}
+
+            {/* Time markers */}
             {days.map((day, index) => (
                 <Text key={day} day={day} index={index} />
             ))}
+
+            {/* Middle "Daily Rituals" button */}
             <g>
-                <circle cx={center} cy={center} r={svgSize * 0.06} className="fill-background" />
+                <circle cx={center} cy={center} r={svgSize * 0.06} className="fill-backdrop" />
                 <circle
                     cx={center} cy={center} r={svgSize * 0.06}
                     role="button" tabIndex={0} aria-label="Select Daily Rituals"
@@ -73,7 +82,7 @@ export default function WheelDaySelector({ svgSize, day: activeDay, center, setD
                           setDay("Daily")
                         }
                     }}
-                    className={`${activeDay === "Daily" ? "fill-de_orange_light" : "fill-background hover:fill-white/5"} stroke-de_orange_light focus:outline-none focus-visible:outline-none focus-visible:stroke-de_orange`}
+                    className={`${activeDay === "Daily" ? "fill-de_orange_light" : "fill-backdrop hover:fill-white/5"} stroke-de_orange_light_muted focus:outline-none focus-visible:outline-none focus-visible:stroke-de_orange`}
                 />
                 <foreignObject width={svgSize*0.12} height={svgSize*0.12} x={center-svgSize*0.06} y={center-svgSize*0.06} className="pointer-events-none">
                     <div className="flex justify-center items-center w-full h-full">

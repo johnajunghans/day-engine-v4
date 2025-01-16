@@ -13,17 +13,18 @@ interface LabelledPanelProps {
     maxSize?: number,
     onResize?: PanelOnResize,
     centerContents?: boolean
+    bottomBorder?: boolean
 }
 
-export default function LabelledPanel ({ children, title, popover, button, ref, size, minSize, maxSize, onResize, centerContents }: LabelledPanelProps) {
+export default function LabelledPanel ({ children, title, popover, button, ref, size, minSize, maxSize, onResize, centerContents, bottomBorder }: LabelledPanelProps) {
   
     if (button && popover) throw Error("Button and Popover cannot both be defined with Labelled Panel component!");
 
     return (
         <ResizablePanel defaultSize={size} minSize={minSize} maxSize={maxSize} onResize={onResize}>
             <div className="w-full h-full flex flex-col">
-                <div className="flex pr-2 gap-1 items-center border-b border-de_orange_light_muted">
-                    <div className="py-2 px-4 border-r border-de_orange_light_muted flex justify-center items-center bg-background">
+                <div className={`flex pr-2 gap-1 items-center border-b border-de_orange_light_muted ${bottomBorder ? "" : "absolute z-10"}`}>
+                    <div className={`py-2 px-4 border-r border-de_orange_light_muted flex justify-center items-center bg-background`}>
                         <span className="text-de_orange text-sm tracking-widest">{title}</span>
                     </div>
                     { popover && popover }

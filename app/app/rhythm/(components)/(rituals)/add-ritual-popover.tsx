@@ -9,6 +9,10 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Color, ColorSelector } from "./color-selector"
 import { AddPopoverWrapper, PopoverControl } from "@/components/ui/custom/add-popover-wrapper"
+import { useRituals } from "@/context/rituals-provider"
+import { Toaster } from "@/components/ui/toaster"
+import { useToast } from "@/hooks/use-toast"
+import { Ritual } from "@/lib/types/rhythm-types"
 
 type AddRitualPopoverProps = {
     popoverControl: PopoverControl
@@ -25,6 +29,9 @@ export default function AddRitualPopover ({ popoverControl }: AddRitualPopoverPr
     const [color, setColor] = useState<Color>("zinc")
     const [isColorSelectorOpen, setIsColorSelectorOpen] = useState(false)
 
+    const { dispatch: ritualDispatch } = useRituals()
+    const { toast } = useToast()
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -34,6 +41,8 @@ export default function AddRitualPopover ({ popoverControl }: AddRitualPopoverPr
     })
 
     async function handleAddRitual(formValues: z.infer<typeof formSchema>) {
+        setIsLoading(true);
+
         const newRitual = {
             name: formValues.name,
             description: formValues.description,
@@ -47,24 +56,33 @@ export default function AddRitualPopover ({ popoverControl }: AddRitualPopoverPr
         })
 
         if (res.ok) {
-            const ritual = await res.json()
-            console.log("Ritual successfully created:", ritual)
-            popoverControl.setIsOpen(false)
+            const ritual: Ritual = await res.json()
+            ritualDispatch({ type: "INSERT", payload: ritual })
+            toast({
+                title: "Ritual Created",
+                description: `${ritual.name}`
+            })
         } else {
-            const error = await res.json()
+            const error: Error = await res.json()
             console.log("Error creating new Ritual", error)
+            toast({
+                title: "Ritual Created",
+                description: `${error.message}`
+            })
         }
+        popoverControl.setIsOpen(false)
     }
 
     return (
+        <>
         <AddPopoverWrapper popoverControl={popoverControl} title="Create New Ritual" isContentBlurred={isColorSelectorOpen}>
             <Form {...form}>
                     <form onSubmit={form.handleSubmit(handleAddRitual)} className="w-[400px] flex flex-col gap-4 mt-1">
                         <FormField control={form.control} name="name" render={({ field }) => (
                             <FormItem>
                                 <FormControl>
-                                    <InputLabelWrapper label="RITUAL NAME">
-                                        <Input autoFocus className="font-[family-name:var(--font-jb-mono)] h-14 text-xl uppercase" type="text" required {...field} />
+                                    <InputLabelWrapper htmlFor="name" label="RITUAL NAME">
+                                        <Input id="name" autoFocus className="font-[family-name:var(--font-jb-mono)] h-14 text-xl uppercase" type="text" required {...field} />
                                         <div className="absolute top-3 right-3">
                                             <ColorSelector selectedColor={color} setSelectedColor={setColor} isOpen={isColorSelectorOpen} setIsOpen={setIsColorSelectorOpen} />
                                         </div>
@@ -75,8 +93,8 @@ export default function AddRitualPopover ({ popoverControl }: AddRitualPopoverPr
                         <FormField control={form.control} name="description" render={({ field }) => (
                             <FormItem>
                                 <FormControl>
-                                    <InputLabelWrapper label="DESCRIPTION">
-                                        <Textarea className="font-[family-name:var(--font-jb-mono)]" {...field} />
+                                    <InputLabelWrapper htmlFor="description" label="DESCRIPTION">
+                                        <Textarea id="description" className="font-[family-name:var(--font-jb-mono)]" {...field} />
                                     </InputLabelWrapper>
                                 </FormControl>
                             </FormItem>
@@ -88,5 +106,7 @@ export default function AddRitualPopover ({ popoverControl }: AddRitualPopoverPr
                     </form>
                 </Form>
         </AddPopoverWrapper>
+        <Toaster />
+        </>
     )
 }

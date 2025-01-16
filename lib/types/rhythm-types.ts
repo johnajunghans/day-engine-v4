@@ -1,5 +1,7 @@
 import { Color } from "@/app/app/rhythm/(components)/(rituals)/color-selector"
 
+const weekArray: DayOfWeek[] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+
 type DayOfWeek = "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday" | "Daily"
 
 type Ritual = {
@@ -56,5 +58,6 @@ export {
     type DayOfWeek,
     type Ritual,
     type RitualInstance,
-    type MappableInstances
+    type MappableInstances,
+    weekArray
 }

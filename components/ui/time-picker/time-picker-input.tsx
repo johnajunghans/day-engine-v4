@@ -4,17 +4,18 @@ import { cn } from "@/lib/utils";
 import React from "react";
 import {
   Period,
+  Time,
   TimePickerType,
   getArrowByType,
-  getDateByType,
-  setDateByType,
+  getTimeByType,
+  setTimeByType,
 } from "./time-picker-utils";
  
 export interface TimePickerInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   picker: TimePickerType;
-  date: Date | undefined;
-  setDate: (date: Date | undefined) => void;
+  time: Time | undefined
+  setTime: (time: Time | undefined) => void;
   period?: Period;
   onRightFocus?: () => void;
   onLeftFocus?: () => void;
@@ -31,8 +32,8 @@ const TimePickerInput = React.forwardRef<
       value,
       id,
       name,
-      date = new Date(new Date().setHours(0, 0, 0, 0)),
-      setDate,
+      time = "00:00",
+      setTime,
       onChange,
       onKeyDown,
       picker,
@@ -61,8 +62,8 @@ const TimePickerInput = React.forwardRef<
     }, [flag]);
  
     const calculatedValue = React.useMemo(() => {
-      return getDateByType(date, picker);
-    }, [date, picker]);
+      return getTimeByType(time, picker);
+    }, [time, picker]);
  
     const calculateNewValue = (key: string) => {
       /*
@@ -86,8 +87,7 @@ const TimePickerInput = React.forwardRef<
         const step = e.key === "ArrowUp" ? 1 : -1;
         const newValue = getArrowByType(calculatedValue, step, picker);
         if (flag) setFlag(false);
-        const tempDate = new Date(date);
-        setDate(setDateByType(tempDate, newValue, picker, period));
+        setTime(setTimeByType(time, newValue, picker, period));
       }
       if (e.key >= "0" && e.key <= "9") {
         if (picker === "12hours") setPrevIntKey(e.key);
@@ -95,8 +95,7 @@ const TimePickerInput = React.forwardRef<
         const newValue = calculateNewValue(e.key);
         if (flag) onRightFocus?.();
         setFlag((prev) => !prev);
-        const tempDate = new Date(date);
-        setDate(setDateByType(tempDate, newValue, picker, period));
+        setTime(setTimeByType(time, newValue, picker, period));
       }
     };
  
@@ -106,7 +105,7 @@ const TimePickerInput = React.forwardRef<
         id={id || picker}
         name={name || picker}
         className={cn(
-          "w-[48px] text-center font-mono text-base tabular-nums caret-transparent focus:bg-accent focus:text-accent-foreground [&::-webkit-inner-spin-button]:appearance-none",
+          "w-12 text-center p-0 border-none font-[family-name:var(--font-jb-mono)] text-white_muted focus:text-foreground focus-visible:text-foreground text-2xl tabular-nums caret-transparent [&::-webkit-inner-spin-button]:appearance-none",
           className
         )}
         value={value || calculatedValue}

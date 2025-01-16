@@ -23,7 +23,7 @@ function AddPopoverWrapper({ popoverControl, isContentBlurred, title, children }
         return (
             <div className="flex justify-between mb-4">
                 <h3 className="text-de_orange">{title}</h3>
-                <Button onClick={() => closePopover(false)} variant="icon" size="icon"><X className="!w-[18px] !h-[18px] stroke-de_orange_light" /></Button>
+                <Button onClick={() => closePopover(false)} aria-label="close" variant="icon" size="icon"><X className="!w-[18px] !h-[18px] stroke-de_orange_light" /></Button>
             </div>
         )
     }
