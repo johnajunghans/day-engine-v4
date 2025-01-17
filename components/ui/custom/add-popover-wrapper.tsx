@@ -2,7 +2,7 @@ import { Plus, X } from "lucide-react";
 import { Button } from "../button";
 import { Popover, PopoverContent, PopoverTrigger } from "../popover";
 import { Dispatch, ReactNode, SetStateAction } from "react";
-import { PopoverClose } from "@radix-ui/react-popover";
+import { PopoverClose, PopoverPortal } from "@radix-ui/react-popover";
 
 type PopoverControl = { isOpen: boolean, setIsOpen: Dispatch<SetStateAction<boolean>> }
 
@@ -37,10 +37,15 @@ function AddPopoverWrapper({ popoverControl, isContentBlurred, title, children }
                     <Plus className="stroke-de_orange !w-[18px] !h-[18px]" />
                 </Button>
             </PopoverTrigger>
-            <PopoverContent align="start" sideOffset={12} alignOffset={-82} className={`${isContentBlurred ? "blur-[1px]" : "blur-0"} duration-75`}>
-                <Header title={title} />
-                { children }
-            </PopoverContent>
+            <PopoverPortal>
+                <div>
+                    <div className="fixed inset-0 bg-black/10 backdrop-blur-[1px] z-10"></div>
+                    <PopoverContent align="start" sideOffset={12} alignOffset={-82} className={`${isContentBlurred ? "blur-[1px]" : "blur-0"} duration-75`}>
+                        <Header title={title} />
+                        { children }
+                    </PopoverContent>
+                </div>
+            </PopoverPortal>
         </Popover>
     )
 }

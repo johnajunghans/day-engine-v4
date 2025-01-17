@@ -24,7 +24,7 @@ export default function EditSheetWrapper({ title, description, children, align="
             <SheetTrigger asChild>
                 <Button variant="icon" size="icon"><Edit /></Button>
             </SheetTrigger>
-            <SheetContent side={align}>
+            <SheetContent side={align} className="backdrop-blur-sm">
                 <SheetHeader>
                     <SheetTitle>{title}</SheetTitle>
                     <SheetDescription hidden={showDescription ? true : false}>{description}</SheetDescription>
