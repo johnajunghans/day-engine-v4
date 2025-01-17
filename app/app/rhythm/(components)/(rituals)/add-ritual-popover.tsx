@@ -8,26 +8,28 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Color, ColorSelector } from "./color-selector"
-import { AddPopoverWrapper, PopoverControl } from "@/components/ui/custom/add-popover-wrapper"
+import { AddPopoverWrapper } from "@/components/ui/custom/add-popover-wrapper"
 import { useRituals } from "@/context/rituals-provider"
 import { Toaster } from "@/components/ui/toaster"
 import { useToast } from "@/hooks/use-toast"
 import { Ritual } from "@/lib/types/rhythm-types"
+import { PopoverClose } from "@radix-ui/react-popover"
 
-type AddRitualPopoverProps = {
-    popoverControl: PopoverControl
-}
+// type AddRitualPopoverProps = {
+   
+// }
 
 const formSchema = z.object({
     name: z.string(),
     description: z.string()
 })
 
-export default function AddRitualPopover ({ popoverControl }: AddRitualPopoverProps) {
+export default function AddRitualPopover ({  }) {
 
     const [isLoading, setIsLoading] = useState(false)
     const [color, setColor] = useState<Color>("zinc")
     const [isColorSelectorOpen, setIsColorSelectorOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
 
     const { dispatch: ritualDispatch } = useRituals()
     const { toast } = useToast()
@@ -70,12 +72,12 @@ export default function AddRitualPopover ({ popoverControl }: AddRitualPopoverPr
                 description: error.message 
             })
         }
-        popoverControl.setIsOpen(false)
+        setIsOpen(false)
     }
 
     return (
         <>
-        <AddPopoverWrapper popoverControl={popoverControl} title="Create New Ritual" isContentBlurred={isColorSelectorOpen}>
+        <AddPopoverWrapper popoverControl={{ isOpen, setIsOpen }} title="Create New Ritual" isContentBlurred={isColorSelectorOpen}>
             <Form {...form}>
                     <form onSubmit={form.handleSubmit(handleAddRitual)} className="w-[400px] flex flex-col gap-4 mt-1">
                         <FormField control={form.control} name="name" render={({ field }) => (
@@ -101,7 +103,9 @@ export default function AddRitualPopover ({ popoverControl }: AddRitualPopoverPr
                         )} />
                         <div className="flex gap-2">
                             <Button type="submit" variant="primary" className={isLoading ? "bg-opacity-50" : "bg-opacity-100"}>Create</Button>
-                            <Button onClick={() => popoverControl.setIsOpen(false)} type="button" variant="text">Cancel</Button>
+                            <PopoverClose asChild>
+                                <Button type="button" variant="text">Cancel</Button>
+                            </PopoverClose>
                         </div>
                     </form>
                 </Form>

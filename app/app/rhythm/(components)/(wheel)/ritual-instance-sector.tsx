@@ -12,12 +12,14 @@ function calcSectCoordinates(sa: number, ea: number, c: number, r: number, br: n
     // Params: start angle, end angle, center, radius, border radius, spring point, type (inner or outer)
     if (t !== "o" && t !== "i") throw Error("Type is incorrectly specified in 'calcSectCoordinates' in 'ritual-sector' component!")
 
+    // Asjusted Radius, slightly different calculation depending on whether it is the inner or outer radius that is being calculated
     const ar = t === "o" ? r - br - 1 : r + br - 1
     // Adjusted Angle
     const aa = br * 360 / (2 * Math.PI * r)
 
     return {
         oS: polarToRect(c, c, ar, sa),
+        // The value of radius is slightly decreased and increased for outer and inner radius, respectively, to tighen the area and pull the sector away slightly at the edges of both the inner and outer circles
         iS: polarToRect(c, c, t === "o" ? r - 2 : r + 2, sa + aa),
         iE: polarToRect(c, c, t === "o" ? r - 2 : r + 2, ea - aa),
         oE: polarToRect(c, c, ar, ea)
@@ -30,6 +32,8 @@ function avg(a: number, b: number) {
 
 export default function RitualInstanceSector({ instance, center, outerRadius, innerRadius }: RitualInstanceSectorProps) {
 
+    console.log(`${instance.Rituals.name} sector re-rendered`)
+
     const br = 6
     const sp = 6
 
@@ -38,8 +42,9 @@ export default function RitualInstanceSector({ instance, center, outerRadius, in
     const ea = timeStringToDegrees(instance.end_time, sp)
 
     // const xy = calcSector(instance.start_time, instance.end_time, center, outerRadius, br, sp)
-    const xy = calcSectCoordinates(sa, ea, center, outerRadius, br, sp, "o")
-    const wz = calcSectCoordinates(sa, ea, center, innerRadius, br, sp, "i")
+    // 0.25 (one quarter of a degree) is added and subtracted to the start and ends times, respectively, to very slightly tighten their areas and give breathing room to adjacent sectors
+    const xy = calcSectCoordinates(sa + 0.25, ea - 0.25, center, outerRadius, br, sp, "o")
+    const wz = calcSectCoordinates(sa + 0.25, ea - 0.25, center, innerRadius, br, sp, "i")
 
     // Calculate text center - midpoint of outer xy points
     const tc = { x: avg(xy.oS.x, xy.oE.x), y: avg(xy.oS.y, xy.oE.y) }

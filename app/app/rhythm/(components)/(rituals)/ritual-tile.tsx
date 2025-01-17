@@ -1,41 +1,45 @@
 import { AccordionContent, AccordionTrigger } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { getElapsedWeeks } from "@/lib/functions/rhythm-functions";
 import { Ritual } from "@/lib/types/rhythm-types";
 import { AccordionItem } from "@radix-ui/react-accordion";
-import { useState } from "react";
+import { Trash2 } from "lucide-react";
+import { memo } from "react";
+import EditRitualSheet from "./edit-ritual-sheet";
 
-export default function RitualTile({ ritual }: { ritual: Ritual }) {
-
-    const [isExpanded, setIsExpanded] = useState(false);
-    const [name, setName] = useState(ritual.name);
-    const [editName, setEditName] = useState(false);
-
+function RitualTile({ ritual }: { ritual: Ritual }) {
     // Get number of weeks since ritual has been created
     const now = new Date();
     const createdAt = new Date(ritual.created_at);
     const weeksElapsed = getElapsedWeeks(now, createdAt);
 
-    function handleEditName() {
-        // Update db
-        setEditName(false);
-    }
+    console.log(`${ritual.name} rerendered`)
 
     return (
         <AccordionItem id="ritual-tile-item" value={`Ritual-${ritual.id}`} className="border-b border-de_orange_light_muted">
             <AccordionTrigger>
                 <div className="flex gap-2 items-center">
-                    <p onClick={() => setEditName(true)} className="text-xl uppercase first-letter:text-3xl tracking-wide font-bold">{name}</p>
+                    <p className="text-xl uppercase first-letter:text-3xl tracking-wide font-bold">{ritual.name}</p>
                     <Separator orientation="vertical" className="h-8" />
                     <p className="w-6 h-6 text-center leading-6 text-lg bg-de_orange_light text-background rounded-sm font-[family-name:var(--font-jb-mono)]">{weeksElapsed}</p>
                     <div className={`w-6 h-6 rounded-sm ${ritual.color}-gradient`}></div>
                  </div>
             </AccordionTrigger>
-            <AccordionContent className="px-4">
+            <AccordionContent className="flex flex-col gap-2 px-4">
                 {/* <Separator /> */}
                 <p className="text-base overflow-ellipsis">{ritual.description}</p>
-                {/* <Separator /> */}
+                <Separator className="bg-white_muted/25" />
+                <div className="flex justify-end">
+                    <EditRitualSheet ritual={ritual} />
+                    <Button variant="icon" size="icon"><Trash2 /></Button>
+                </div>
             </AccordionContent>
         </AccordionItem>
     )
 }
+
+// Memoize the RitualTile component
+export default memo(RitualTile, (prevProps, nextProps) => {
+    return prevProps.ritual === nextProps.ritual;
+});

@@ -1,12 +1,11 @@
 import { polarToRect } from "@/lib/functions/polar-coordinate-functions";
 
 interface WheelOutline {
-    svgSize: number,
     center: number,
     outerCircleRadius: number
 }
 
-export default function WheelOutline({ svgSize, center, outerCircleRadius }: WheelOutline) {
+export default function WheelOutline({ center, outerCircleRadius }: WheelOutline) {
 
     
 
@@ -31,7 +30,7 @@ export default function WheelOutline({ svgSize, center, outerCircleRadius }: Whe
 
     return (
         <g id="wheel-outline">
-            <circle cx={center} cy={center} r={outerCircleRadius} className="stroke-de_orange_light_muted fill-[rgba(255,255,255,0.03)]" />
+            <circle cx={center} cy={center} r={outerCircleRadius} className="stroke-de_orange_light_muted fill-background" />
             <g id="lines-wrapper">
                 {rotations.map(rot => (
                     <path

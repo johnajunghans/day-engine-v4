@@ -1,4 +1,4 @@
-import { AddPopoverWrapper, PopoverControl } from "@/components/ui/custom/add-popover-wrapper";
+import { AddPopoverWrapper } from "@/components/ui/custom/add-popover-wrapper";
 import InputLabelWrapper from "@/components/ui/custom/input-label-wrapper";
 import StartEndTimeInput from "@/components/ui/custom/time-input";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
@@ -15,10 +15,11 @@ import { useState } from "react";
 import { useRitualInstances } from "@/context/ritual-instances-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/hooks/use-toast";
+import { PopoverClose } from "@radix-ui/react-popover";
 
-interface AddInstancePopoverProps {
-    popoverControl: PopoverControl
-}
+// interface AddInstancePopoverProps {
+    
+// }
 
 const formSchema = z.object({
     ritual: z.string(),
@@ -27,8 +28,9 @@ const formSchema = z.object({
     days: z.array(z.string())
 })
 
-export default function AddInstancePopover({ popoverControl }: AddInstancePopoverProps) {
+export default function AddInstancePopover({  }) {
     const [isLoading, setIsLoading] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
     const { toast } = useToast()
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -70,7 +72,7 @@ export default function AddInstancePopover({ popoverControl }: AddInstancePopove
                 description: `From ${newInstance.start_time} to ${newInstance.end_time}`
             })
             form.reset();
-            popoverControl.setIsOpen(false)
+            setIsOpen(false)
         } else {
             const { error }: { error: { message: string, code: string }} = await res.json();
             console.log(error)
@@ -84,7 +86,7 @@ export default function AddInstancePopover({ popoverControl }: AddInstancePopove
 
     return (
         <>
-        <AddPopoverWrapper title="Create New Ritual Instance" popoverControl={popoverControl}>
+        <AddPopoverWrapper title="Create New Ritual Instance" popoverControl={{ isOpen, setIsOpen }}>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(handleAddInstance)} className="flex flex-col gap-4">
 
@@ -174,7 +176,9 @@ export default function AddInstancePopover({ popoverControl }: AddInstancePopove
                     </FormField>
                     <div className="flex gap-2">
                         <Button type="submit" variant="primary">Create</Button>
-                        <Button onClick={() => popoverControl.setIsOpen(false)} type="button" variant="text">Cancel</Button>
+                        <PopoverClose asChild>
+                            <Button type="button" variant="text">Cancel</Button>
+                        </PopoverClose>
                     </div>
                 </form>
             </Form>

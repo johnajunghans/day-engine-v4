@@ -8,14 +8,16 @@ import WheelFunction from "./wheel-function";
 import AddInstancePopover from "./add-instance-popover";
 import { useRitualInstances } from "@/context/ritual-instances-provider";
 
-interface WheelMainProps {
+// interface WheelMainProps {
 
-}
+// }
 
-export default function WheelMain({ }: WheelMainProps) {
+export default function WheelMain({ }) {
 
-    const [isPopoverOpen, setIsPopoverOpen] = useState(false)
+    const popoverRef = useRef<HTMLDivElement | undefined>(undefined)
     const { state: instances } = useRitualInstances();
+
+    console.log(popoverRef.current)
 
     const panelRef = useRef<HTMLDivElement>(null)
     const [panelDimensions, setPanelDimensions] = useState({ width: 0, height: 0 })
@@ -45,9 +47,9 @@ export default function WheelMain({ }: WheelMainProps) {
     const innerCircleRadius = svgSize * 0.16
     
     return (
-        <LabelledPanel title="WHEEL" ref={panelRef} onResize={debounce(() => handleWheelResize(), 500)} centerContents popover={<AddInstancePopover popoverControl={{ isOpen: isPopoverOpen, setIsOpen: setIsPopoverOpen}} />}>
-            {svgSize && <svg width={svgSize} height={svgSize} overflow="visible" className={`mx-2 ${isPopoverOpen ? "blur-sm" : "blur-0"} transition-[blur] duration-200`}>
-                <WheelOutline svgSize={svgSize} center={center} outerCircleRadius={outerCircleRadius} />
+        <LabelledPanel title="WHEEL" ref={panelRef} onResize={debounce(() => handleWheelResize(), 500)} centerContents popover={<AddInstancePopover />}>
+            {svgSize && <svg width={svgSize} height={svgSize} overflow="visible" className={`mx-2 transition-[blur] duration-200`}>
+                <WheelOutline center={center} outerCircleRadius={outerCircleRadius} />
                 <WheelFunction svgSize={svgSize} instances={instances} center={center} outerCircleRadius={outerCircleRadius} innerRadius={innerCircleRadius} />
             </svg>}
         </LabelledPanel>
