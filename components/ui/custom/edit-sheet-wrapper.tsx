@@ -8,7 +8,7 @@ import {
   } from "@/components/ui/sheet"
 import { Button } from "../button"
 import { Edit } from "lucide-react"
-import { ReactNode } from "react"
+import { Dispatch, ReactNode, SetStateAction } from "react"
 
 interface EditSheetWrapperProps {
     title: string,
@@ -16,15 +16,17 @@ interface EditSheetWrapperProps {
     showDescription?: boolean
     children: ReactNode
     align?: "top" | "right" | "bottom" | "left"
+    isOpen: boolean
+    setIsOpen: Dispatch<SetStateAction<boolean>>
 }
 
-export default function EditSheetWrapper({ title, description, children, align="right", showDescription=false }: EditSheetWrapperProps) {
+export default function EditSheetWrapper({ title, description, children, align="right", showDescription=false, isOpen, setIsOpen }: EditSheetWrapperProps) {
     return (
-        <Sheet>
+        <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
                 <Button variant="icon" size="icon"><Edit /></Button>
             </SheetTrigger>
-            <SheetContent side={align} className="backdrop-blur-sm">
+            <SheetContent side={align} className="font-[family-name:var(--font-philosopher)] opacity-95 flex flex-col w-auto gap-4">
                 <SheetHeader>
                     <SheetTitle>{title}</SheetTitle>
                     <SheetDescription hidden={showDescription ? true : false}>{description}</SheetDescription>

@@ -7,6 +7,7 @@ import { AccordionItem } from "@radix-ui/react-accordion";
 import { Trash2 } from "lucide-react";
 import { memo } from "react";
 import EditRitualSheet from "./edit-ritual-sheet";
+import DeleteRitualDialog from "./delete-ritual-dialog";
 
 function RitualTile({ ritual }: { ritual: Ritual }) {
     // Get number of weeks since ritual has been created
@@ -32,7 +33,7 @@ function RitualTile({ ritual }: { ritual: Ritual }) {
                 <Separator className="bg-white_muted/25" />
                 <div className="flex justify-end">
                     <EditRitualSheet ritual={ritual} />
-                    <Button variant="icon" size="icon"><Trash2 /></Button>
+                    <DeleteRitualDialog ritual={ritual} />
                 </div>
             </AccordionContent>
         </AccordionItem>
