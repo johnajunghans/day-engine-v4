@@ -2,16 +2,18 @@ import { DayOfWeek, MappableInstances } from "@/lib/types/rhythm-types"
 import { useState } from "react"
 import RitualInstanceSector from "./ritual-instance-sector"
 import WheelDaySelector from "./wheel-day-selector"
+import { useRitualInstances } from "@/context/ritual-instances-provider"
 
 interface WheelFunctionProps {
     svgSize: number
-    instances: MappableInstances,
     center: number
     outerCircleRadius: number
     innerRadius: number
 }
 
-export default function WheelFunction({ svgSize, instances, center, outerCircleRadius, innerRadius }: WheelFunctionProps) {
+export default function WheelFunction({ svgSize, center, outerCircleRadius, innerRadius }: WheelFunctionProps) {
+
+    const { state: instances } = useRitualInstances()
 
     const days: DayOfWeek[] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     const today = new Date().getDay()

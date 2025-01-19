@@ -11,13 +11,16 @@ interface AddPopoverWrapperProps {
     isContentBlurred?: boolean
     title: string
     children: ReactNode
+    align?: "start" | "center" | "end" | undefined
+    sideOffset?: number
+    alignOffset?: number
 }
 
 interface PopoverHeaderProps {
     title: string,
 }
 
-function AddPopoverWrapper({ popoverControl, isContentBlurred, title, children }: AddPopoverWrapperProps) {
+function AddPopoverWrapper({ popoverControl, isContentBlurred, title, children, align="start", sideOffset=0, alignOffset=0 }: AddPopoverWrapperProps) {
 
     function Header({ title }: PopoverHeaderProps) {
         return (
@@ -40,7 +43,7 @@ function AddPopoverWrapper({ popoverControl, isContentBlurred, title, children }
             <PopoverPortal>
                 <div>
                     <div className="fixed inset-0 bg-black/10 backdrop-blur-[1px] z-10"></div>
-                    <PopoverContent align="start" sideOffset={12} alignOffset={-82} className={`${isContentBlurred ? "blur-[1px]" : "blur-0"} duration-75`}>
+                    <PopoverContent align={align} sideOffset={sideOffset} alignOffset={alignOffset} className={`${isContentBlurred ? "blur-[1px]" : "blur-0"} duration-75`}>
                         <Header title={title} />
                         { children }
                     </PopoverContent>

@@ -67,7 +67,13 @@ export default function AddRitualPopover ({  }) {
 
     return (
         <>
-        <AddPopoverWrapper popoverControl={{ isOpen, setIsOpen }} title="Create New Ritual" isContentBlurred={isColorSelectorOpen}>
+        <AddPopoverWrapper 
+            popoverControl={{ isOpen, setIsOpen }} 
+            title="Create New Ritual" 
+            isContentBlurred={isColorSelectorOpen}
+            sideOffset={12}
+            alignOffset={-92}
+        >
             <RitualForm 
                 form={form}
                 handleSubmit={handleAddRitual as SubmitHandler<FieldValues>}

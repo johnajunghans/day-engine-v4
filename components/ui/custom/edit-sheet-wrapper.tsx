@@ -18,20 +18,22 @@ interface EditSheetWrapperProps {
     align?: "top" | "right" | "bottom" | "left"
     isOpen: boolean
     setIsOpen: Dispatch<SetStateAction<boolean>>
+    triggerAsChild?: boolean
+    form?: ReactNode | undefined
 }
 
-export default function EditSheetWrapper({ title, description, children, align="right", showDescription=false, isOpen, setIsOpen }: EditSheetWrapperProps) {
+export default function EditSheetWrapper({ title, description, children, align="right", showDescription=false, isOpen, setIsOpen, triggerAsChild=false, form=undefined }: EditSheetWrapperProps) {
     return (
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-                <Button variant="icon" size="icon"><Edit /></Button>
+                { triggerAsChild ? children : <Button variant="icon" size="icon"><Edit /></Button> }
             </SheetTrigger>
-            <SheetContent side={align} className="font-[family-name:var(--font-philosopher)] opacity-95 flex flex-col w-auto gap-4">
+            <SheetContent side={align} className="!max-w-none border-de_orange_light_muted font-[family-name:var(--font-philosopher)] opacity-95 flex flex-col w-auto gap-4">
                 <SheetHeader>
                     <SheetTitle>{title}</SheetTitle>
                     <SheetDescription hidden={showDescription ? true : false}>{description}</SheetDescription>
                 </SheetHeader>
-                { children }
+                { triggerAsChild ? form : children }
             </SheetContent>
         </Sheet>
     )

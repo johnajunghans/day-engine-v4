@@ -15,7 +15,6 @@ import { useRitualInstances } from "@/context/ritual-instances-provider";
 export default function WheelMain({ }) {
 
     const popoverRef = useRef<HTMLDivElement | undefined>(undefined)
-    const { state: instances } = useRitualInstances();
 
     console.log(popoverRef.current)
 
@@ -47,10 +46,10 @@ export default function WheelMain({ }) {
     const innerCircleRadius = svgSize * 0.16
     
     return (
-        <LabelledPanel title="WHEEL" ref={panelRef} onResize={debounce(() => handleWheelResize(), 500)} centerContents popover={<AddInstancePopover />}>
+        <LabelledPanel title="WHEEL" ref={panelRef} onResize={debounce(() => handleWheelResize(), 500)} centerContents popover={<AddInstancePopover />} bottomBorder>
             {svgSize && <svg width={svgSize} height={svgSize} overflow="visible" className={`mx-2 transition-[blur] duration-200`}>
                 <WheelOutline center={center} outerCircleRadius={outerCircleRadius} />
-                <WheelFunction svgSize={svgSize} instances={instances} center={center} outerCircleRadius={outerCircleRadius} innerRadius={innerCircleRadius} />
+                <WheelFunction svgSize={svgSize} center={center} outerCircleRadius={outerCircleRadius} innerRadius={innerCircleRadius} />
             </svg>}
         </LabelledPanel>
     )

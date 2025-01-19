@@ -67,8 +67,9 @@ export default function StartEndTimeInput({ time, setTime, label }: StartEndTime
             name={label}
             type="time"
             value={time}
+            placeholder="00:00"
             onChange={e => setTime(e.target.value)}
-            className="border-none tracking-widest text-white_muted fill-white_muted focus-visible:text-white text-3xl font-[family-name:var(--font-jb-mono)]"
+            className="border-none tracking-widest focus-visible:text-white text-3xl font-[family-name:var(--font-jb-mono)]"
         />
     )
 }

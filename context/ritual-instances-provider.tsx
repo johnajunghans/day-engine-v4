@@ -20,15 +20,16 @@ interface RitualContextProps {
 }
 
 const ritualInstancesReducer = (state: MappableInstances, action: RitualInstancesAction): MappableInstances => {
-    const stateCopy = {...state}
     switch (action.type) {
         case "INSERT": {
+            const stateCopy = {...state}
             action.payload.days.forEach(day => {
                 stateCopy[day] = [...(stateCopy[day] || []), action.payload];
             })
             return stateCopy
         }
         case "UPDATE": {
+            const stateCopy = {...state}
             action.payload.days.forEach(day => {
                 if (!stateCopy[day]) return; // Guard against missing days
         
@@ -42,9 +43,11 @@ const ritualInstancesReducer = (state: MappableInstances, action: RitualInstance
                     stateCopy[day] = updated;
                 }
             });
+            console.log(state, stateCopy)
             return stateCopy;
         }   
         case "DELETE": {
+            const stateCopy = {...state}
             action.payload.days.forEach(day => {
                 if (!stateCopy[day]) return; // Guard against missing days
         
@@ -58,7 +61,6 @@ const ritualInstancesReducer = (state: MappableInstances, action: RitualInstance
             });
             return stateCopy;
         }
-        return stateCopy
       default:
         throw new Error(`Unhandled action type: ${action}`);
     }

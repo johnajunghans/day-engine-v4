@@ -60,8 +60,8 @@ const LoginPopover: FunctionComponent<LoginPopoverProps> = () => {
                         <FormField control={form.control} name="email" render={({ field }) => (
                             <FormItem>
                                 <FormControl>
-                                    <InputLabelWrapper label="EMAIL">
-                                        <Input className="font-[family-name:var(--font-jb-mono)]" type="email" required {...field} />
+                                    <InputLabelWrapper htmlFor="email" label="EMAIL">
+                                        <Input id="email" className="font-[family-name:var(--font-jb-mono)]" type="email" required {...field} />
                                     </InputLabelWrapper>
                                 </FormControl>
                                 <FormMessage />
@@ -70,8 +70,8 @@ const LoginPopover: FunctionComponent<LoginPopoverProps> = () => {
                         <FormField control={form.control} name="password" render={({ field }) => (
                             <FormItem>
                                 <FormControl>
-                                    <InputLabelWrapper label="PASSWORD">
-                                        <Input className="font-[family-name:var(--font-jb-mono)]" type={showPassword ? "text" : "password"} required {...field} />
+                                    <InputLabelWrapper htmlFor="password" label="PASSWORD">
+                                        <Input id="password" className="font-[family-name:var(--font-jb-mono)]" type={showPassword ? "text" : "password"} required {...field} />
                                         <Button className="absolute right-3 h-4 top-4 p-2 focus-visible:ring-de_orange_light" type="button" variant="text" onClick={() => setShowPassword(!showPassword)}>{showPassword ? <EyeOff /> : <Eye />}</Button>
                                     </InputLabelWrapper>
                                 </FormControl>

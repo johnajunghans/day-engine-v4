@@ -1,10 +1,8 @@
 import { AccordionContent, AccordionTrigger } from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { getElapsedWeeks } from "@/lib/functions/rhythm-functions";
 import { Ritual } from "@/lib/types/rhythm-types";
 import { AccordionItem } from "@radix-ui/react-accordion";
-import { Trash2 } from "lucide-react";
 import { memo } from "react";
 import EditRitualSheet from "./edit-ritual-sheet";
 import DeleteRitualDialog from "./delete-ritual-dialog";
@@ -14,8 +12,6 @@ function RitualTile({ ritual }: { ritual: Ritual }) {
     const now = new Date();
     const createdAt = new Date(ritual.created_at);
     const weeksElapsed = getElapsedWeeks(now, createdAt);
-
-    console.log(`${ritual.name} rerendered`)
 
     return (
         <AccordionItem id="ritual-tile-item" value={`Ritual-${ritual.id}`} className="border-b border-de_orange_light_muted">
