@@ -10,7 +10,7 @@ interface RitualInstancesProviderProps {
 
 type RitualInstancesAction =
   | { type: "INSERT"; payload: RitualInstance }
-  | { type: "UPDATE"; payload: RitualInstance }
+  | { type: "UPDATE"; payload: { instance: RitualInstance, daysInfo: { daysToUpdate: DayOfWeek[], daysToRemove: DayOfWeek[], daysToAdd: DayOfWeek[] } | undefined } }
   | { type: "DELETE"; payload: { days: DayOfWeek[], id: number } };
 
 
@@ -30,20 +30,33 @@ const ritualInstancesReducer = (state: MappableInstances, action: RitualInstance
         }
         case "UPDATE": {
             const stateCopy = {...state}
-            action.payload.days.forEach(day => {
+            action.payload.daysInfo?.daysToUpdate.forEach(day => {
                 if (!stateCopy[day]) return; // Guard against missing days
         
                 // Map through the array, replacing only the matching instance
                 const updated = stateCopy[day].map(
-                    instance => instance.id === action.payload.id ? action.payload : instance
+                    instance => instance.id === action.payload.instance.id ? action.payload.instance : instance
                 );
         
-                // Only update state if something actually changed
-                if (updated !== stateCopy[day]) {
-                    stateCopy[day] = updated;
-                }
+                stateCopy[day] = updated;
             });
-            console.log(state, stateCopy)
+            action.payload.daysInfo?.daysToRemove.forEach(day => {
+                if (!stateCopy[day]) return;
+
+                const updated = stateCopy[day].filter(
+                    instance => instance.id !== action.payload.instance.id
+                )
+
+                stateCopy[day] = updated;
+            })
+            action.payload.daysInfo?.daysToAdd.forEach(day => {
+                if (!stateCopy[day]) return;
+
+                const updated = [...(stateCopy[day] || []), action.payload.instance];
+
+                stateCopy[day] = updated;
+            })
+            // console.log(state, stateCopy)
             return stateCopy;
         }   
         case "DELETE": {

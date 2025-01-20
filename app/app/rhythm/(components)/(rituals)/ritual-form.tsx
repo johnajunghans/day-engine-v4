@@ -6,7 +6,7 @@ import { Color, ColorSelector } from "./color-selector";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { FieldValues, SubmitHandler, UseFormReturn } from "react-hook-form";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 
 export const formSchema = z.object({
     name: z.string(),
@@ -26,6 +26,7 @@ interface RitualFormsProps {
     setIsOpen: Dispatch<SetStateAction<boolean>>
     buttonName: string
     width?: number
+    deleteRitualTrigger?: ReactNode
 }
 
 export function RitualForm({ 
@@ -38,7 +39,8 @@ export function RitualForm({
         isLoading,
         setIsOpen,
         buttonName,
-        width
+        width,
+        deleteRitualTrigger
     }: RitualFormsProps) {
     return (
         <Form {...form}>
@@ -64,9 +66,12 @@ export function RitualForm({
                         </FormControl>
                     </FormItem>
                 )} />
-                <div className="flex gap-2">
-                    <Button type="submit" variant="primary" className={isLoading ? "bg-opacity-50" : "bg-opacity-100"}>{buttonName}</Button>
-                    <Button onClick={() => setIsOpen(false)} type="button" variant="text">Cancel</Button>
+                <div className="w-full relative">
+                    <div className="flex gap-2">
+                        <Button type="submit" variant="primary" className={isLoading ? "bg-opacity-50" : "bg-opacity-100"}>{buttonName}</Button>
+                        <Button onClick={() => setIsOpen(false)} type="button" variant="text">Cancel</Button>
+                    </div>
+                    { deleteRitualTrigger }
                 </div>
              </form>
         </Form>

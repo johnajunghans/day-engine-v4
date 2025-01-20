@@ -6,17 +6,12 @@ import { debounce } from "lodash";
 import WheelOutline from "./wheel-outline";
 import WheelFunction from "./wheel-function";
 import AddInstancePopover from "./add-instance-popover";
-import { useRitualInstances } from "@/context/ritual-instances-provider";
 
 // interface WheelMainProps {
 
 // }
 
 export default function WheelMain({ }) {
-
-    const popoverRef = useRef<HTMLDivElement | undefined>(undefined)
-
-    console.log(popoverRef.current)
 
     const panelRef = useRef<HTMLDivElement>(null)
     const [panelDimensions, setPanelDimensions] = useState({ width: 0, height: 0 })

@@ -8,6 +8,7 @@ import { useState } from "react";
 import { Color } from "./color-selector";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useToast } from "@/hooks/use-toast";
+import DeleteRitualDialog from "./delete-ritual-dialog";
 
 interface EditRitualSheetProps {
     ritual: Ritual
@@ -82,6 +83,7 @@ export default function EditRitualSheet({ ritual }: EditRitualSheetProps) {
                 setIsColorSelectorOpen={setIsColorSelectorOpen}
                 setIsOpen={setIsOpen}
                 buttonName="Update"
+                deleteRitualTrigger={<DeleteRitualDialog ritual={ritual} />}
             />
         </EditSheetWrapper>
     )

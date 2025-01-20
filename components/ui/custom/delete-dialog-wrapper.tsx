@@ -23,7 +23,7 @@ export function DeleteDialogWrapper({ title, description, handleDelete }: Delete
     return (
         <AlertDialog>
             <AlertDialogTrigger asChild>
-                <Button variant="icon" size="icon"><Trash2 /></Button>
+                <Button variant="ghost" className="border-red-600 px-3 hover:bg-red-800 [&_svg]:stroke-white absolute right-0 top-0"><Trash2 size={20} /></Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
             <AlertDialogHeader>

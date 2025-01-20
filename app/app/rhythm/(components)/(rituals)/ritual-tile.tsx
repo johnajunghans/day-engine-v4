@@ -29,7 +29,6 @@ function RitualTile({ ritual }: { ritual: Ritual }) {
                 <Separator className="bg-white_muted/25" />
                 <div className="flex justify-end">
                     <EditRitualSheet ritual={ritual} />
-                    <DeleteRitualDialog ritual={ritual} />
                 </div>
             </AccordionContent>
         </AccordionItem>

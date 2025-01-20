@@ -1,7 +1,7 @@
 import { polarToRect, timeStringToDegrees } from "@/lib/functions/polar-coordinate-functions"
 import { RitualInstance } from "@/lib/types/rhythm-types"
 import EditInstanceSheet from "./edit-instance-sheet"
-import { memo, useState } from "react"
+import { memo, useMemo, useState } from "react"
 
 interface RitualInstanceSectorProps {
     instance: RitualInstance,
@@ -34,7 +34,7 @@ function avg(a: number, b: number) {
 
 function RitualInstanceSector({ instance, center, outerRadius, innerRadius }: RitualInstanceSectorProps) {
     const [isOpen, setIsOpen] = useState(false)
-    console.log(`${instance.Rituals.name} re-rendered`)
+    console.log(instance)
 
     const br = 6
     const sp = 6
@@ -45,8 +45,8 @@ function RitualInstanceSector({ instance, center, outerRadius, innerRadius }: Ri
 
     // const xy = calcSector(instance.start_time, instance.end_time, center, outerRadius, br, sp)
     // 0.25 (one quarter of a degree) is added and subtracted to the start and ends times, respectively, to very slightly tighten their areas and give breathing room to adjacent sectors
-    const xy = calcSectCoordinates(sa + 0.25, ea - 0.25, center, outerRadius, br, sp, "o")
-    const wz = calcSectCoordinates(sa + 0.25, ea - 0.25, center, innerRadius, br, sp, "i")
+    const xy = useMemo(() => calcSectCoordinates(sa + 0.25, ea - 0.25, center, outerRadius, br, sp, "o"), [sa, ea, center, outerRadius, br, sp]) 
+    const wz = useMemo(() => calcSectCoordinates(sa + 0.25, ea - 0.25, center, innerRadius, br, sp, "i"), [sa, ea, center, innerRadius, br, sp]) 
 
     // Calculate text center - midpoint of outer xy points
     const tc = { x: avg(xy.oS.x, xy.oE.x), y: avg(xy.oS.y, xy.oE.y) }
