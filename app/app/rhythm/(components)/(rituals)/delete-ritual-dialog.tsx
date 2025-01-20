@@ -36,7 +36,7 @@ export default function DeleteRitualDialog({ ritual }: { ritual: Ritual }) {
         <>
         <DeleteDialogWrapper 
             title="Delete Ritual"
-            description={ritual.name}
+            description={`Are you sure you want to delete the ritual, '${ritual.name}'?`}
             handleDelete={handleDeleteRitual}
         />
         <Toaster />

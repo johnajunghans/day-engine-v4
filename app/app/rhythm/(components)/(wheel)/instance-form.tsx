@@ -5,7 +5,7 @@ import InputLabelWrapper from "@/components/ui/custom/input-label-wrapper";
 import StartEndTimeInput from "@/components/ui/custom/time-input";
 import { FieldValues, SubmitHandler, UseFormReturn } from "react-hook-form";
 import { z } from "zod";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 import { Button } from "@/components/ui/button";
 import { MoveRight } from "lucide-react";
 import { Ritual, weekArray } from "@/lib/types/rhythm-types";
@@ -27,6 +27,7 @@ interface InstanceFormsProps {
     setIsOpen: Dispatch<SetStateAction<boolean>>
     buttonName: string
     width?: number
+    deleteInstanceTrigger?: ReactNode
 }
 
 export function getRitualById(id: number | string, rituals: Ritual[]) {
@@ -35,7 +36,7 @@ export function getRitualById(id: number | string, rituals: Ritual[]) {
     return ritual
 }
 
-export function InstanceForm({ form, handleSubmit, isLoading, setIsOpen, buttonName }: InstanceFormsProps) {
+export function InstanceForm({ form, handleSubmit, isLoading, setIsOpen, buttonName, deleteInstanceTrigger }: InstanceFormsProps) {
 
     const { state: rituals } = useRituals()
 
@@ -128,9 +129,12 @@ export function InstanceForm({ form, handleSubmit, isLoading, setIsOpen, buttonN
                     </FormItem>
                 )}>
                 </FormField>
-                <div className="flex gap-2">
-                    <Button type="submit" variant="primary">{buttonName}</Button>
-                    <Button onClick={() => {setIsOpen(false); form.reset()}} type="button" variant="text">Cancel</Button>
+                <div className="w-full relative">
+                    <div className="flex gap-2">
+                        <Button type="submit" variant="primary" className={isLoading ? "bg-opacity-50" : "bg-opacity-100"}>{buttonName}</Button>
+                        <Button onClick={() => setIsOpen(false)} type="button" variant="text">Cancel</Button>
+                    </div>
+                    { deleteInstanceTrigger }
                 </div>
             </form>
         </Form>

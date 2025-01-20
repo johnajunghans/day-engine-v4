@@ -1,4 +1,4 @@
-import { insert, update } from "@/lib/functions/api-functions";
+import { deleteItem, insert, update } from "@/lib/functions/api-functions";
 
 export async function POST(req: Request) {
     const res = await insert(req, "Ritual_Instances")
@@ -7,5 +7,10 @@ export async function POST(req: Request) {
 
 export async function PUT(req: Request) {
     const res = await update(req, "Ritual_Instances")
+    return res
+}
+
+export async function DELETE(req: Request) {
+    const res = await deleteItem(req, "Ritual_Instances")
     return res
 }

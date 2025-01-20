@@ -10,6 +10,7 @@ import { useRituals } from "@/context/rituals-provider";
 import { areStringArraysSameOrderInd } from "@/lib/functions/helper-functions";
 import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/hooks/use-toast";
+import DeleteInstanceDialog from "./delete-instance-dialog";
 
 interface EditInstanceSheetProps {
     instance: RitualInstance
@@ -142,6 +143,7 @@ export default function EditInstanceSheet({ instance, children, isOpen, setIsOpe
                     isLoading={isLoading}
                     setIsOpen={setIsOpen}
                     buttonName="Update"
+                    deleteInstanceTrigger={<DeleteInstanceDialog instance={instance} />}
                 />
             }
         >
