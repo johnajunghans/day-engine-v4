@@ -34,26 +34,36 @@ function avg(a: number, b: number) {
 
 function RitualInstanceSector({ instance, center, outerRadius, innerRadius }: RitualInstanceSectorProps) {
     const [isOpen, setIsOpen] = useState(false)
-    console.log(instance)
 
     const br = 6
     const sp = 6
 
-    // Calculate start angle and end angle (in degrees)
-    const sa = timeStringToDegrees(instance.start_time, sp)
-    const ea = timeStringToDegrees(instance.end_time, sp)
+    function calculateSectorData() {
+        console.log("Calculating Sector Data")
+        // Calculate start angle and end angle (in degrees)
+        const sa = timeStringToDegrees(instance.start_time, sp)
+        const ea = timeStringToDegrees(instance.end_time, sp)
 
-    // const xy = calcSector(instance.start_time, instance.end_time, center, outerRadius, br, sp)
-    // 0.25 (one quarter of a degree) is added and subtracted to the start and ends times, respectively, to very slightly tighten their areas and give breathing room to adjacent sectors
-    const xy = useMemo(() => calcSectCoordinates(sa + 0.25, ea - 0.25, center, outerRadius, br, sp, "o"), [sa, ea, center, outerRadius, br, sp]) 
-    const wz = useMemo(() => calcSectCoordinates(sa + 0.25, ea - 0.25, center, innerRadius, br, sp, "i"), [sa, ea, center, innerRadius, br, sp]) 
+        // const xy = calcSector(instance.start_time, instance.end_time, center, outerRadius, br, sp)
+        // 0.25 (one quarter of a degree) is added and subtracted to the start and ends times, respectively, to very slightly tighten their areas and give breathing room to adjacent sectors
+        const xy = calcSectCoordinates(sa + 0.25, ea - 0.25, center, outerRadius, br, sp, "o")
+        const wz = calcSectCoordinates(sa + 0.25, ea - 0.25, center, innerRadius, br, sp, "i")
 
-    // Calculate text center - midpoint of outer xy points
-    const tc = { x: avg(xy.oS.x, xy.oE.x), y: avg(xy.oS.y, xy.oE.y) }
-    // Calculate text angle 
-    const ta = avg(sa, ea)
-    // Flip text boolean check
-    const ft = ta >= 90 && ta < 270 ? true : false
+        // Calculate text angle 
+        const ta = ea >= sa ? avg(sa, ea) : avg(sa, ea + 360)
+        // Flip text boolean check
+        const ft = ta >= 90 && ta < 270 ? true : false
+        // Calculate text center - midpoint of outer xy points
+        const tc = { x: avg(xy.oS.x, xy.oE.x), y: avg(xy.oS.y, xy.oE.y) }
+        // // Calculate traslation scalar - contanst value * distance between xy.oS and xy.oE
+        const xd = Math.sqrt(Math.pow(xy.oS.x - xy.oE.x, 2) + Math.pow(xy.oS.y - xy.oE.y, 2))
+        // Calculate text translation
+        const tt = 0.00000052 * Math.pow(xd, 3)
+
+        return { xy, wz, ta, ft, tc, tt }
+    }
+
+    const { xy, wz, ta, ft, tc, tt } = useMemo(calculateSectorData, [instance.start_time, instance.end_time, center, outerRadius, innerRadius])
 
     return (
         <EditInstanceSheet instance={instance} isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -83,7 +93,7 @@ function RitualInstanceSector({ instance, center, outerRadius, innerRadius }: Ri
                     }}
                 />
                 <text
-                    x={tc.x} y={tc.y}
+                    x={ft ? tc.x + tt : tc.x - tt} y={tc.y}
                     textAnchor={ft ? "end" : "start"} alignmentBaseline="central"
                     style={{transform: `rotate(${ft ? ta + 180 : ta}deg)`, transformOrigin: `${tc.x}px ${tc.y}px`}}
                     className="fill-white/80 text-lg pointer-events-none"
