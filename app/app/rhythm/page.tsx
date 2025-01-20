@@ -73,13 +73,13 @@ export default async function Rhythm() {
 
     return (
         <ResizablePanelGroup direction="horizontal" className="flex-grow h-screen border-l border-de_orange_light_muted">
-            <RitualsProvider initialValue={rituals}>
-                <RitualInstancesProvider initialValue={mappableInstances}>
+            <RitualInstancesProvider initialValue={mappableInstances}>
+                <RitualsProvider initialValue={rituals}>
                     <Rituals />
                     <ResizableHandle className="h-screen bg-de_orange_light_muted" />
                     <WheelMain />
-                </RitualInstancesProvider>
-            </RitualsProvider>
+                </RitualsProvider>
+            </RitualInstancesProvider>
         </ResizablePanelGroup>
     )
 }

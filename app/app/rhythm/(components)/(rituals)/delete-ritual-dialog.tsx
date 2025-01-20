@@ -1,13 +1,13 @@
 import { DeleteDialogWrapper } from "@/components/ui/custom/delete-dialog-wrapper";
-import { Toaster } from "@/components/ui/toaster";
+import { useRitualInstances } from "@/context/ritual-instances-provider";
 import { useRituals } from "@/context/rituals-provider";
-import { useToast } from "@/hooks/use-toast";
 import { Ritual } from "@/lib/types/rhythm-types";
+import { toast } from "sonner";
 
 export default function DeleteRitualDialog({ ritual }: { ritual: Ritual }) {
 
-    const { dispatch } = useRituals();
-    const { toast } = useToast()
+    const { dispatch: ritualsDispatch } = useRituals();
+    const { dispatch: instanceDispatch } = useRitualInstances();
 
     async function handleDeleteRitual() {
         const res = await fetch('http://localhost:3000/api/rituals', {
@@ -17,29 +17,23 @@ export default function DeleteRitualDialog({ ritual }: { ritual: Ritual }) {
         })
 
         if (res.ok) {
-            dispatch({ type: "DELETE", payload: ritual.id })
-            toast({
-                title: "Ritual Deleted",
-                description: ritual.name
-            })
+            ritualsDispatch({ type: "DELETE", payload: ritual.id })
+            instanceDispatch({ type: "RITUAL_DELETE", payload: ritual.id }) // delete all instances of this ritual
+            toast.success("Ritual Deleted")
         } else {
             const { error } = await res.json()
             console.log(error)
-            toast({
-                title: "Error Deleting Ritual",
+            toast.error("Error Deleting Ritual", {
                 description: error.message
             })
         }
     }
 
     return (
-        <>
         <DeleteDialogWrapper 
             title="Delete Ritual"
             description={`Are you sure you want to delete the ritual, '${ritual.name}'?`}
             handleDelete={handleDeleteRitual}
         />
-        <Toaster />
-        </>
     )
 }

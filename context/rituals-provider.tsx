@@ -14,17 +14,22 @@ interface RitualsContextProps {
 }
 
 const ritualsReducer = (state: Ritual[], action: RitualsAction): Ritual[] => {
-    switch (action.type) {
-      case "INSERT":
-        return [...state, action.payload];
-      case "UPDATE":
-        return state.map(ritual => ritual.id === action.payload.id ? action.payload : ritual)
-      case "DELETE":
-        return state.filter(ritual => ritual.id !== action.payload);
-      default:
-        throw new Error(`Unhandled action type: ${action}`);
+  switch (action.type) {
+    case "INSERT": {
+      return [...state, action.payload];
     }
-  };
+    case "UPDATE": {
+      return state.map(ritual => 
+        ritual.id === action.payload.id ? action.payload : ritual
+      );
+    }
+    case "DELETE": {
+      return state.filter(ritual => ritual.id !== action.payload);
+    }
+    default:
+      throw new Error(`Unhandled action type: ${action}`);
+  }
+};
 
 const RitualsContext = createContext<RitualsContextProps | undefined>(undefined)
 

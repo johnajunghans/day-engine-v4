@@ -9,6 +9,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/hooks/use-toast";
 import { formSchema, getRitualById, InstanceForm } from "./instance-form";
 import { useRituals } from "@/context/rituals-provider";
+import { toast } from "sonner";
 
 // interface AddInstancePopoverProps {
     
@@ -17,12 +18,11 @@ import { useRituals } from "@/context/rituals-provider";
 export default function AddInstancePopover({  }) {
     const [isLoading, setIsLoading] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
-    const { toast } = useToast()
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            ritual: 0,
+            ritual: "",
             startTime: "",
             endTime: "",
             days: []
@@ -54,25 +54,20 @@ export default function AddInstancePopover({  }) {
             const { data: newInstance }: {data: RitualInstance} = await res.json()
             const completeInstance = {...newInstance, Rituals: { name: ritual.name, color: ritual.color }}
             dispatch({ type: "INSERT", payload: completeInstance as RitualInstance })
-            toast({
-                title: `New Instance of ${ritual.name}`,
-                description: `From ${newInstance.start_time} to ${newInstance.end_time}`
-            })
+            toast.success("New Ritual Instance Created");
             form.reset();
             setIsOpen(false)
         } else {
             const { error }: { error: { message: string, code: string }} = await res.json();
             console.log(error)
-            toast({
-                title: "Error creating new Ritual Instance",
-                description: error.message 
+            toast.error("Error creating new Ritual Instance", {
+                description: error.message
             })
         }
 
     }
 
     return (
-        <>
         <AddPopoverWrapper 
             title="Create New Ritual Instance" 
             popoverControl={{ isOpen, setIsOpen }}
@@ -87,7 +82,5 @@ export default function AddInstancePopover({  }) {
                 buttonName="Create"
             />
         </AddPopoverWrapper>
-        <Toaster />
-        </>
     )
 }

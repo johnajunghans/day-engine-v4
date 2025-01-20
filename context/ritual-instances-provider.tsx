@@ -1,6 +1,7 @@
 'use client'
 
-import { DayOfWeek, MappableInstances, RitualInstance } from "@/lib/types/rhythm-types";
+import { Color } from "@/app/app/rhythm/(components)/(rituals)/color-selector";
+import { DayOfWeek, MappableInstances, Ritual, RitualInstance, weekArray } from "@/lib/types/rhythm-types";
 import { createContext, Dispatch, ReactNode, useContext, useReducer } from "react";
 
 interface RitualInstancesProviderProps {
@@ -9,9 +10,11 @@ interface RitualInstancesProviderProps {
 }
 
 type RitualInstancesAction =
-  | { type: "INSERT"; payload: RitualInstance }
-  | { type: "UPDATE"; payload: { instance: RitualInstance, daysInfo: { daysToUpdate: DayOfWeek[], daysToRemove: DayOfWeek[], daysToAdd: DayOfWeek[] } | undefined } }
-  | { type: "DELETE"; payload: { days: DayOfWeek[], id: number } };
+    | { type: "INSERT"; payload: RitualInstance }
+    | { type: "UPDATE"; payload: { instance: RitualInstance, daysInfo: { daysToUpdate: DayOfWeek[], daysToRemove: DayOfWeek[], daysToAdd: DayOfWeek[] } | undefined } }
+    | { type: "DELETE"; payload: { days: DayOfWeek[], id: number } }
+    | { type: "RITUAL_UPDATE", payload: Ritual }
+    | { type: "RITUAL_DELETE", payload: number };
 
 
 interface RitualContextProps {
@@ -73,6 +76,22 @@ const ritualInstancesReducer = (state: MappableInstances, action: RitualInstance
                 }
             });
             return stateCopy;
+        }
+        case "RITUAL_UPDATE": {
+            const stateCopy = {...state}
+            weekArray.forEach(day => {
+                if (!stateCopy[day]) return;
+                stateCopy[day] = stateCopy[day].map(instance => instance.ritual_id === action.payload.id ? {...instance, Rituals: { name: action.payload.name, color: action.payload.color as Color }} : instance)
+            })
+            return stateCopy
+        }
+        case "RITUAL_DELETE": {
+            const stateCopy = {...state}
+            weekArray.forEach(day => {
+                if (!stateCopy[day]) return;
+                stateCopy[day] = stateCopy[day].filter(instance => instance.ritual_id !== action.payload)
+            })
+            return stateCopy
         }
       default:
         throw new Error(`Unhandled action type: ${action}`);

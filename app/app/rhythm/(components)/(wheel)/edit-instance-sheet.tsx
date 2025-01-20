@@ -8,9 +8,8 @@ import { z } from "zod";
 import { useRitualInstances } from "@/context/ritual-instances-provider";
 import { useRituals } from "@/context/rituals-provider";
 import { areStringArraysSameOrderInd } from "@/lib/functions/helper-functions";
-import { Toaster } from "@/components/ui/toaster";
-import { useToast } from "@/hooks/use-toast";
 import DeleteInstanceDialog from "./delete-instance-dialog";
+import { toast } from "sonner";
 
 interface EditInstanceSheetProps {
     instance: RitualInstance
@@ -46,7 +45,6 @@ function compareInstanceArrays(oldArr: DayOfWeek[], newArr: DayOfWeek[], haveDay
 export default function EditInstanceSheet({ instance, children, isOpen, setIsOpen }: EditInstanceSheetProps) {
 
     const [isLoading, setIsLoading] = useState(false)
-    console.log("Instance in edit form", instance)
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -60,7 +58,6 @@ export default function EditInstanceSheet({ instance, children, isOpen, setIsOpe
 
     const { dispatch } = useRitualInstances()
     const { state: rituals } = useRituals()
-    const { toast } = useToast()
 
     useEffect(() => {
         if (!isOpen) {
@@ -111,23 +108,18 @@ export default function EditInstanceSheet({ instance, children, isOpen, setIsOpe
             }
             const daysInfo = compareInstanceArrays(instance.days, formValues.days as DayOfWeek[], haveDaysChanged)
             dispatch({ type: "UPDATE", payload: { instance: completedUpdatedInstanceRes, daysInfo: daysInfo } })
-            toast({
-                title: "Updated Ritual Instance",
-                description: updatedInstance.ritual_id && `Ritual: ${ritual.name}` + updatedInstance.start_time && `Start Time: ${updatedInstance.start_time}` + updatedInstance.end_time && `End Time: ${updatedInstance.end_time}` + updatedInstance.days && `New Days: ${updatedInstance.days}`
-            })
+            toast.success("Ritual Instance Updated")
             return setIsOpen(false)
         } else {
             const { error } = await res.json()
             console.log(error)
-            toast({
-                title: "Error creating new Ritual Instance",
-                description: error.message 
+            toast.error("Error updating Ritual Instance", {
+                description: error.message
             })
         }
     }
 
     return (
-        <>
         <EditSheetWrapper
             title="Edit Ritual"
             description={`${instance.Rituals.name}`}
@@ -149,7 +141,5 @@ export default function EditInstanceSheet({ instance, children, isOpen, setIsOpe
         >
             { children }
         </EditSheetWrapper>
-        <Toaster />
-        </>
     )
 }

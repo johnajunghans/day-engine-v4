@@ -1,12 +1,11 @@
 import { DeleteDialogWrapper } from "@/components/ui/custom/delete-dialog-wrapper";
 import { useRitualInstances } from "@/context/ritual-instances-provider";
-import { useToast } from "@/hooks/use-toast";
 import { RitualInstance } from "@/lib/types/rhythm-types";
+import { toast } from "sonner";
 
 export default function DeleteInstanceDialog({ instance }: { instance: RitualInstance}) {
 
     const { dispatch } = useRitualInstances();
-    const { toast } = useToast()
 
     async function handleDeleteInstance() {
         const res = await fetch('http://localhost:3000/api/ritual_instances', {
@@ -17,15 +16,11 @@ export default function DeleteInstanceDialog({ instance }: { instance: RitualIns
 
         if (res.ok) {
             dispatch({ type: "DELETE", payload: { days: instance.days, id: instance.id } })
-            toast({
-                title: "Instance Deleted",
-                description: `Instance of '${instance.Rituals.name}' successfully deleted.`
-            })
+            toast.success("Instance Deleted")
         } else {
             const { error } = await res.json()
             console.log(error)
-            toast({
-                title: "Error Deleting Instance",
+            toast.error("Error Deleting Instance", {
                 description: error.message
             })
         }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Philosopher, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/context/theme-provider";
+import { Toaster } from "sonner";
 
 const philosopher = Philosopher({
   variable: "--font-philosopher",
@@ -31,6 +32,7 @@ export default function RootLayout({
         className={`${philosopher.variable} ${jetBrainsMono.variable} min-h-screen bg-backdrop antialiased`}
       >
         <ThemeProvider>{children}</ThemeProvider>
+        <Toaster richColors />
       </body>
     </html>
   );

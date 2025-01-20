@@ -7,8 +7,9 @@ import { formSchema, RitualForm } from "./ritual-form";
 import { useState } from "react";
 import { Color } from "./color-selector";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useToast } from "@/hooks/use-toast";
 import DeleteRitualDialog from "./delete-ritual-dialog";
+import { useRitualInstances } from "@/context/ritual-instances-provider";
+import { toast } from "sonner";
 
 interface EditRitualSheetProps {
     ritual: Ritual
@@ -28,8 +29,8 @@ export default function EditRitualSheet({ ritual }: EditRitualSheetProps) {
     const [isColorSelectorOpen, setIsColorSelectorOpen] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
 
-    const { dispatch } = useRituals();
-    const { toast } = useToast();
+    const { dispatch: ritualsDispatch } = useRituals();
+    const { dispatch: instanceDispatch } = useRitualInstances();
 
     async function handleEditRitual(formValues: z.infer<typeof formSchema>) {
         setIsLoading(true)
@@ -55,19 +56,14 @@ export default function EditRitualSheet({ ritual }: EditRitualSheetProps) {
 
         if (res.ok) {
             const { data: updatedRitualRes }: { data: Ritual } = await res.json()
-            dispatch({ type: "UPDATE", payload: updatedRitualRes })
-            toast({
-                title: "Ritual Updated",
-                description: `${updatedRitualRes.name}`
-            })
+            ritualsDispatch({ type: "UPDATE", payload: updatedRitualRes })
+            instanceDispatch({ type: "RITUAL_UPDATE", payload: updatedRitualRes }) // Update all instances with the new ritual name and color
+            toast.success("Ritual successfully updated")
             setIsOpen(false)
         } else {
             const { error } = await res.json()
             console.log(error)
-            toast({
-                title: "Error Updating Ritual",
-                description: `${error.message}`
-            }) 
+            toast.error("Error updating ritual") 
         }
     }
 
