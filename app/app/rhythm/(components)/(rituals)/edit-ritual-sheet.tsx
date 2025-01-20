@@ -57,7 +57,9 @@ export default function EditRitualSheet({ ritual }: EditRitualSheetProps) {
         if (res.ok) {
             const { data: updatedRitualRes }: { data: Ritual } = await res.json()
             ritualsDispatch({ type: "UPDATE", payload: updatedRitualRes })
-            instanceDispatch({ type: "RITUAL_UPDATE", payload: updatedRitualRes }) // Update all instances with the new ritual name and color
+            if (formValues.name !== ritual.name || color !== ritual.color) { // If the ritual name or color has changed
+                instanceDispatch({ type: "RITUAL_UPDATE", payload: updatedRitualRes }) // Update all instances with the new ritual name and color
+            }
             toast.success("Ritual successfully updated")
             setIsOpen(false)
         } else {
