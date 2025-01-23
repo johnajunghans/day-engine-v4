@@ -2,17 +2,13 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Eye, EyeOff, Lock } from "lucide-react";
-import { FunctionComponent, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Input } from "@/components/ui/input";
 import InputLabelWrapper from "@/components/ui/custom/input-label-wrapper";
 import login from "@/app/(auth)/login/actions";
-
-interface LoginPopoverProps {
-    
-}
 
 const formSchema = z.object({
     email: z.string().email({ message: "Invalid Email Address" }),
@@ -25,7 +21,7 @@ const formSchema = z.object({
       .regex(/[@$!%*?&]/, { message: "Password must contain at least one special character (@$!%*?&)" }),
   });
  
-const LoginPopover: FunctionComponent<LoginPopoverProps> = () => {
+const LoginPopover = () => {
 
     const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -51,7 +47,7 @@ const LoginPopover: FunctionComponent<LoginPopoverProps> = () => {
             <PopoverTrigger asChild>
                 <Button variant="text" className="px-2">
                     <span>Login</span>
-                    <Lock />
+                    <Lock size={16} />
                 </Button>
             </PopoverTrigger>
             <PopoverContent>
@@ -83,7 +79,7 @@ const LoginPopover: FunctionComponent<LoginPopoverProps> = () => {
                                 <Button formAction={login} type="submit" variant="primary" onClick={() => setIsLoading(true)} className={isLoading ? "bg-opacity-50" : "bg-opacity-100"}>Login</Button>
                                 <Button onClick={onCreateAccount} disabled type="button" variant="secondary">Create an Account</Button>
                             </div>
-                            <Button onClick={onForgotPassword} type="button" variant="text">Forgot Password?</Button>
+                            <Button onClick={onForgotPassword} disabled type="button" variant="text">Forgot Password?</Button>
                         </div>
                     </form>
                 </Form>

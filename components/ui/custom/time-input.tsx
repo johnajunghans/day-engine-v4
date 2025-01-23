@@ -1,14 +1,10 @@
-import { ReactNode, useRef, useState } from "react";
-import { TimePickerInput } from "../time-picker/time-picker-input";
-import { TimePeriodSelect } from "../time-picker/period-selector";
-import { Label } from "../label";
 import { Input } from "../input";
 
-interface LabelledTimeInputProps {
-    label: string
-    children: ReactNode
-    htmlFor: string
-}
+// interface LabelledTimeInputProps {
+//     label: string
+//     children: ReactNode
+//     htmlFor: string
+// }
 
 // interface StartEndTimeInputProps {
 //     time: string,
@@ -35,14 +31,14 @@ interface StartEndTimeInputProps {
 //     onLeftFocus: () => void; 
 // }
 
-function LabelledTimeInput({ label, children, htmlFor }: LabelledTimeInputProps) {
-    return (
-        <div className="flex flex-col items-center [&_label]:focus-within:text-de_orange">
-            { children }
-            <Label htmlFor={htmlFor} className="text-xs text-de_orange_light -translate-y-2">{label}</Label>
-        </div>
-    )
-}
+// function LabelledTimeInput({ label, children, htmlFor }: LabelledTimeInputProps) {
+//     return (
+//         <div className="flex flex-col items-center [&_label]:focus-within:text-de_orange">
+//             { children }
+//             <Label htmlFor={htmlFor} className="text-xs text-de_orange_light -translate-y-2">{label}</Label>
+//         </div>
+//     )
+// }
 
 // function TimeInput({ id, name, ref, type, time, setTime }: TimeInputProps) {
 

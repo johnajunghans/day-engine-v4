@@ -26,5 +26,5 @@ export default async function login(formData: FormData) {
   }
 
   revalidatePath('/', 'layout')
-  redirect('/app')
+  redirect('/app/rhythm')
 }

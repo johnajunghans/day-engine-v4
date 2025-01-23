@@ -1,4 +1,4 @@
-import { DayOfWeek, MappableInstances } from "@/lib/types/rhythm-types"
+import { DayOfWeek } from "@/lib/types/rhythm-types"
 import { useState } from "react"
 import RitualInstanceSector from "./ritual-instance-sector"
 import WheelDaySelector from "./wheel-day-selector"
