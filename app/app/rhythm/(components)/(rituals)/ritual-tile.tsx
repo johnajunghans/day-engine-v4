@@ -5,7 +5,6 @@ import { Ritual } from "@/lib/types/rhythm-types";
 import { AccordionItem } from "@radix-ui/react-accordion";
 import { memo } from "react";
 import EditRitualSheet from "./edit-ritual-sheet";
-import DeleteRitualDialog from "./delete-ritual-dialog";
 
 function RitualTile({ ritual }: { ritual: Ritual }) {
     // Get number of weeks since ritual has been created

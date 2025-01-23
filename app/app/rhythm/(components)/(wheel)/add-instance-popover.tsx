@@ -1,12 +1,10 @@
 import { AddPopoverWrapper } from "@/components/ui/custom/add-popover-wrapper";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { RitualInstance } from "@/lib/types/rhythm-types";
 import { useState } from "react";
 import { useRitualInstances } from "@/context/ritual-instances-provider";
-import { Toaster } from "@/components/ui/toaster";
-import { useToast } from "@/hooks/use-toast";
 import { formSchema, getRitualById, InstanceForm } from "./instance-form";
 import { useRituals } from "@/context/rituals-provider";
 import { toast } from "sonner";
@@ -76,7 +74,7 @@ export default function AddInstancePopover({  }) {
         >
             <InstanceForm 
                 form={form}
-                handleSubmit={handleAddInstance}
+                handleSubmit={handleAddInstance as SubmitHandler<FieldValues>}
                 isLoading={isLoading}
                 setIsOpen={setIsOpen}
                 buttonName="Create"

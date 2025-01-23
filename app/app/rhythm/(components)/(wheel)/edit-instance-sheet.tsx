@@ -2,7 +2,7 @@ import EditSheetWrapper from "@/components/ui/custom/edit-sheet-wrapper";
 import { formSchema, getRitualById, InstanceForm } from "./instance-form";
 import { DayOfWeek, RitualInstance } from "@/lib/types/rhythm-types";
 import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useRitualInstances } from "@/context/ritual-instances-provider";
@@ -131,7 +131,7 @@ export default function EditInstanceSheet({ instance, children, isOpen, setIsOpe
             form={
                 <InstanceForm 
                     form={form}
-                    handleSubmit={handleEditInstance}
+                    handleSubmit={handleEditInstance as SubmitHandler<FieldValues>}
                     isLoading={isLoading}
                     setIsOpen={setIsOpen}
                     buttonName="Update"

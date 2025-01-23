@@ -1,7 +1,7 @@
 import EditSheetWrapper from "@/components/ui/custom/edit-sheet-wrapper";
 import { useRituals } from "@/context/rituals-provider";
 import { Ritual } from "@/lib/types/rhythm-types";
-import { useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { formSchema, RitualForm } from "./ritual-form";
 import { useState } from "react";
@@ -73,7 +73,7 @@ export default function EditRitualSheet({ ritual }: EditRitualSheetProps) {
         <EditSheetWrapper title="Edit Ritual" align="left" description={`${ritual.name}`} isOpen={isOpen} setIsOpen={setIsOpen}>
             <RitualForm 
                 form={form}
-                handleSubmit={handleEditRitual}
+                handleSubmit={handleEditRitual as SubmitHandler<FieldValues>}
                 color={color}
                 setColor={setColor}
                 isLoading={isLoading}
