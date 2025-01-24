@@ -5,11 +5,10 @@ import { z } from "zod"
 import { Color } from "./color-selector"
 import { AddPopoverWrapper } from "@/components/ui/custom/add-popover-wrapper"
 import { useRituals } from "@/context/rituals-provider"
-import { Toaster } from "@/components/ui/toaster"
-import { useToast } from "@/hooks/use-toast"
 import { Ritual } from "@/lib/types/rhythm-types"
 import { formSchema, RitualForm } from "./ritual-form"
 import { domain, isDev } from "@/lib/variables"
+import { toast } from "sonner"
 
 // type AddRitualPopoverProps = {
    
@@ -25,7 +24,6 @@ export default function AddRitualPopover ({  }) {
     const [isOpen, setIsOpen] = useState(false)
 
     const { dispatch: ritualDispatch } = useRituals()
-    const { toast } = useToast()
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -53,23 +51,16 @@ export default function AddRitualPopover ({  }) {
         if (res.ok) {
             const { data: ritual }: { data: Ritual } = await res.json()
             ritualDispatch({ type: "INSERT", payload: ritual })
-            toast({
-                title: "Ritual Created",
-                description: `${ritual.name}`
-            })
+            toast.success("Ritual Created")
         } else {
             const { error }: { error: { message: string, code: string }} = await res.json();
             console.log(error)
-            toast({
-                title: "Error creating new Ritual Instance",
-                description: error.message 
-            })
+            toast.error("Error creating Ritual")
         }
         setIsOpen(false)
     }
 
     return (
-        <>
         <AddPopoverWrapper 
             popoverControl={{ isOpen, setIsOpen }} 
             title="Create New Ritual" 
@@ -90,7 +81,5 @@ export default function AddRitualPopover ({  }) {
                 width={400}
             />
         </AddPopoverWrapper>
-        <Toaster />
-        </>
     )
 }

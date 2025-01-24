@@ -32,7 +32,7 @@ export default function RootLayout({
         className={`${philosopher.variable} ${jetBrainsMono.variable} min-h-screen bg-backdrop antialiased`}
       >
         <ThemeProvider>{children}</ThemeProvider>
-        <Toaster richColors />
+        <Toaster className="sonner" />
       </body>
     </html>
   );

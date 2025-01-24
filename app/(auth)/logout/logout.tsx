@@ -8,7 +8,7 @@ export default function Logout() {
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button type="submit" variant="icon" size="icon">
-                    <LogOut size={20} />
+                    <LogOut />
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" sideOffset={16} className="min-w-0 p-2">

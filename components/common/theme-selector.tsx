@@ -28,7 +28,7 @@ const ThemeSelector: FunctionComponent<ThemeSelectorProps> = ({ align="end" }) =
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button variant="icon" size="icon">
-                    <SwatchBook size={20} />
+                    <SwatchBook />
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent sideOffset={16} align={align}>

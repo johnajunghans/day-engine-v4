@@ -8,6 +8,7 @@ body {
 
 @layer base {
   :root {
+    --de-orange: #F1B049;
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
@@ -180,4 +181,10 @@ input[type="time"] {
 
 .slate-gradient {
   background-image: linear-gradient(to right bottom, #020617, #0d121f, #131a28, #182131, #1e293b);
+}
+
+.sonner li {
+  background-color: var(--background) !important;
+  color: var(--de-orange);
+  border: 1px solid var(--de-orange-light-muted) !important;
 }
