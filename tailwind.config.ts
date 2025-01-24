@@ -1,4 +1,6 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from 'tailwindcss-animate';
+import { PluginAPI } from "tailwindcss/types/config";
 
 export default {
     darkMode: ["class"],
@@ -91,8 +93,8 @@ export default {
   	}
   },
   plugins: [
-	require("tailwindcss-animate"),
-	function ({ addVariant }) {
+	tailwindcssAnimate,
+	function ({ addVariant }: PluginAPI) {
 		addVariant('autofill', '&:-webkit-autofill');
 	}
 ],
