@@ -39,7 +39,6 @@ function RitualInstanceSector({ instance, center, outerRadius, innerRadius }: Ri
     const sp = 6
 
     function calculateSectorData() {
-        console.log("Calculating Sector Data")
         // Calculate start angle and end angle (in degrees)
         const sa = timeStringToDegrees(instance.start_time, sp)
         const ea = timeStringToDegrees(instance.end_time, sp)

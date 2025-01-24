@@ -45,7 +45,7 @@ const Navbar = () => {
                     ))}
                 </div>
             </div>
-            <div className="flex justify-evenly w-full">
+            <div className="flex justify-between w-full">
                 <ThemeSelector align="start" />
                 {/* <UserCircle className={footerIconStyles} /> */}
                 <Logout />

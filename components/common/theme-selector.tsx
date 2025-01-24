@@ -2,6 +2,7 @@ import { FunctionComponent, useEffect, useState } from "react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { SwatchBook } from "lucide-react";
 import { Color, useTheme } from "@/context/theme-provider";
+import { Button } from "../ui/button";
 
 interface ThemeSelectorProps {
     align: "center" | "end" | "start";
@@ -26,7 +27,9 @@ const ThemeSelector: FunctionComponent<ThemeSelectorProps> = ({ align="end" }) =
     return (  
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <SwatchBook role="button" className="stroke-de_orange_light w-8 h-8 p-1 hover:bg-white/5 rounded-sm cursor-pointer"/>
+                <Button variant="icon" size="icon">
+                    <SwatchBook size={20} />
+                </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent sideOffset={16} align={align}>
                 <DropdownMenuLabel>THEME</DropdownMenuLabel>

@@ -47,10 +47,10 @@ const LoginPopover = () => {
             <PopoverTrigger asChild>
                 <Button variant="text" className="px-2">
                     <span>Login</span>
-                    <Lock size={16} />
+                    <Lock size={14} />
                 </Button>
             </PopoverTrigger>
-            <PopoverContent>
+            <PopoverContent alignOffset={-8}>
                 <Form {...form}>
                     <form className="w-[400px] flex flex-col gap-4 mt-1">
                         <FormField control={form.control} name="email" render={({ field }) => (

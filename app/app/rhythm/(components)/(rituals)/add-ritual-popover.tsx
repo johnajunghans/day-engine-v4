@@ -9,10 +9,13 @@ import { Toaster } from "@/components/ui/toaster"
 import { useToast } from "@/hooks/use-toast"
 import { Ritual } from "@/lib/types/rhythm-types"
 import { formSchema, RitualForm } from "./ritual-form"
+import { domain, isDev } from "@/lib/variables"
 
 // type AddRitualPopoverProps = {
    
 // }
+
+console.log(domain, isDev)
 
 export default function AddRitualPopover ({  }) {
 
@@ -41,7 +44,7 @@ export default function AddRitualPopover ({  }) {
             color
         }
 
-        const res = await fetch('http://localhost:3000/api/rituals', {
+        const res = await fetch(`${domain}/api/rituals`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newRitual)

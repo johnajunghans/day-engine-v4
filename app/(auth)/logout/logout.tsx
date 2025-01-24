@@ -1,11 +1,21 @@
 import { Button } from "@/components/ui/button";
 import logout from "./actions";
 import { LogOut } from "lucide-react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 export default function Logout() {
     return (
-        <form action={logout}>
-            <Button type="submit" variant="icon" size="icon"><LogOut className="stroke-de_orange_light !w-8 !h-8 p-1" /></Button>
-        </form>
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <Button type="submit" variant="icon" size="icon">
+                    <LogOut size={20} />
+                </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" sideOffset={16} className="min-w-0 p-2">
+                <form action={logout}>
+                    <Button type="submit" variant="primary">Logout</Button>
+                </form>
+            </DropdownMenuContent>
+        </DropdownMenu>
     )
 }
