@@ -18,7 +18,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     // Included function as initial value which searches localStorage for potential value
 
     const [theme, setTheme] = useState<Theme>(() => {
-        if (typeof window !== undefined) {
+        if (typeof window !== "undefined") {
             return (localStorage.getItem('theme') as Theme) || "dark default"
         } else return "dark default"
     });
