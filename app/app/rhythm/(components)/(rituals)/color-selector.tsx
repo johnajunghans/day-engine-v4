@@ -23,7 +23,7 @@ function ColorSelector ({ setSelectedColor, selectedColor, isOpen, setIsOpen }: 
             <DropdownMenuContent align="center" sideOffset={12}>
                 <DropdownMenuLabel>COLOR</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuRadioGroup value={selectedColor} onValueChange={setSelectedColor}>
+                <DropdownMenuRadioGroup value={selectedColor} onValueChange={setSelectedColor as (value: string) => void}>
                     {colors.map(color => (
                         <DropdownMenuRadioItem value={color} key={color}><div className={`w-6 h-6 shadow-sm rounded-sm ${color}-gradient`} /></DropdownMenuRadioItem>
                     ))}
