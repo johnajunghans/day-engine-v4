@@ -10,7 +10,6 @@ import { FunctionComponent } from "react";
 import LoginPopover from "./login-popover";
 import { Session } from "@supabase/supabase-js";
 import { User } from "lucide-react";
-import { toast } from "sonner";
 
 interface NavbarProps {
     session: Session | null
@@ -25,9 +24,6 @@ const Navbar: FunctionComponent<NavbarProps> = ({ session }) => {
     //     { name: "Blog", href: "/blog" }
     // ]
 
-    // function testToast() {
-    //     toast.success("Test Toast", { duration: 300000 })
-    // }
 
     return (
         <div className="flex gap-2 fixed m-2 w-[calc(100vw-16px)] z-10">
@@ -43,7 +39,6 @@ const Navbar: FunctionComponent<NavbarProps> = ({ session }) => {
                     ))} */}
                 </nav>
                 <div className="flex items-center">
-                    {/* <Button variant="text" className="pl-1 pr-4" onClick={testToast}>Test Toast</Button> */}
                     <div className="flex gap-2 items-center pr-2">
                         <ThemeSelector align="end" />
                         <Separator orientation="vertical" className="h-8" />
