@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Access-Control-Allow-Origin",
-            value: "*", // Set your origin
+            value: "https://www.dayengine.com", // Set your origin
           },
           {
             key: "Access-Control-Allow-Methods",
