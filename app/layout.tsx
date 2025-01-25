@@ -3,6 +3,7 @@ import { Philosopher, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/context/theme-provider";
 import { Toaster } from "sonner";
+import ClientWrapper from "@/components/client-wrapper";
 
 const philosopher = Philosopher({
   variable: "--font-philosopher",
@@ -31,7 +32,11 @@ export default function RootLayout({
       <body
         className={`${philosopher.variable} ${jetBrainsMono.variable} min-h-screen bg-backdrop antialiased`}
       >
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <ClientWrapper>
+            { children }
+          </ClientWrapper>
+        </ThemeProvider>
         <Toaster className="sonner" />
       </body>
     </html>

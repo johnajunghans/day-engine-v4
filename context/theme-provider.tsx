@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, ReactNode, useContext, useEffect, useLayoutEffect, useState } from "react"
+import { createContext, ReactNode, useContext, useEffect, useState } from "react"
 
 export type Mode = "light" | "dark"
 export type Color = "default" | "blue" | "green" | "purple"
@@ -18,15 +18,6 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     // Included function as initial value which searches localStorage for potential value
 
     const [theme, setTheme] = useState<Theme>("dark default");
-
-    useLayoutEffect(() => {
-        if (typeof window !== "undefined") {
-            const storedTheme = localStorage.getItem("theme") as Theme;
-            if (storedTheme) {
-                document.documentElement.setAttribute('data-theme', storedTheme);
-            }
-        }
-    }, []);
 
     useEffect(() => {
         localStorage.setItem('theme', theme);
