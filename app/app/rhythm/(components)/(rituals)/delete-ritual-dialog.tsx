@@ -2,6 +2,7 @@ import { DeleteDialogWrapper } from "@/components/ui/custom/delete-dialog-wrappe
 import { useRitualInstances } from "@/context/ritual-instances-provider";
 import { useRituals } from "@/context/rituals-provider";
 import { Ritual } from "@/lib/types/rhythm-types";
+import { domain } from "@/lib/variables";
 import { toast } from "sonner";
 
 export default function DeleteRitualDialog({ ritual }: { ritual: Ritual }) {
@@ -10,7 +11,7 @@ export default function DeleteRitualDialog({ ritual }: { ritual: Ritual }) {
     const { dispatch: instanceDispatch } = useRitualInstances();
 
     async function handleDeleteRitual() {
-        const res = await fetch('http://localhost:3000/api/rituals', {
+        const res = await fetch(`${domain}/api/rituals`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(ritual.id)

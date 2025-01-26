@@ -10,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import DeleteRitualDialog from "./delete-ritual-dialog";
 import { useRitualInstances } from "@/context/ritual-instances-provider";
 import { toast } from "sonner";
+import { domain } from "@/lib/variables";
 
 interface EditRitualSheetProps {
     ritual: Ritual
@@ -48,7 +49,7 @@ export default function EditRitualSheet({ ritual }: EditRitualSheetProps) {
             ...(color !== ritual.color && { color })
         }
 
-        const res = await fetch('http://localhost:3000/api/rituals', {
+        const res = await fetch(`${domain}/api/rituals`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(updatedRitual)

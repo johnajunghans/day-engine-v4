@@ -10,6 +10,7 @@ import { useRituals } from "@/context/rituals-provider";
 import { areStringArraysSameOrderInd } from "@/lib/functions/helper-functions";
 import DeleteInstanceDialog from "./delete-instance-dialog";
 import { toast } from "sonner";
+import { domain } from "@/lib/variables";
 
 interface EditInstanceSheetProps {
     instance: RitualInstance
@@ -93,7 +94,7 @@ export default function EditInstanceSheet({ instance, children, isOpen, setIsOpe
             days: formValues.days
         }
 
-        const res = await fetch('http://localhost:3000/api/ritual_instances', {
+        const res = await fetch(`${domain}/api/ritual_instances`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(updatedInstance)

@@ -8,6 +8,7 @@ import { useRitualInstances } from "@/context/ritual-instances-provider";
 import { formSchema, getRitualById, InstanceForm } from "./instance-form";
 import { useRituals } from "@/context/rituals-provider";
 import { toast } from "sonner";
+import { domain } from "@/lib/variables";
 
 // interface AddInstancePopoverProps {
     
@@ -42,7 +43,7 @@ export default function AddInstancePopover({  }) {
             days: formValues.days
         }
 
-        const res = await fetch('http://localhost:3000/api/ritual_instances', {
+        const res = await fetch(`${domain}/api/ritual_instances`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify(instance)
