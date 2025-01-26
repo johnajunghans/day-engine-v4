@@ -52,17 +52,15 @@ function RitualInstanceSector({ instance, center, outerRadius, innerRadius }: Ri
         const ta = ea >= sa ? avg(sa, ea) : avg(sa, ea + 360)
         // Flip text boolean check
         const ft = ta >= 90 && ta < 270 ? true : false
-        // Calculate text center - midpoint of outer xy points
-        const tc = { x: avg(xy.oS.x, xy.oE.x), y: avg(xy.oS.y, xy.oE.y) }
-        // // Calculate traslation scalar - contanst value * distance between xy.oS and xy.oE
-        const xd = Math.sqrt(Math.pow(xy.oS.x - xy.oE.x, 2) + Math.pow(xy.oS.y - xy.oE.y, 2))
-        // Calculate text translation
-        const tt = 0.00000052 * Math.pow(xd, 3)
+        // Calculate text center
+        const tc = polarToRect(center, center, outerRadius, ta)
+        // Calculate text offset
+        const to = outerRadius*0.04
 
-        return { xy, wz, ta, ft, tc, tt }
+        return { xy, wz, ta, ft, tc, to }
     }
 
-    const { xy, wz, ta, ft, tc, tt } = useMemo(calculateSectorData, [instance.start_time, instance.end_time, center, outerRadius, innerRadius])
+    const { xy, wz, ta, ft, tc, to } = useMemo(calculateSectorData, [instance.start_time, instance.end_time, center, outerRadius, innerRadius])
 
     return (
         <EditInstanceSheet instance={instance} isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -92,7 +90,7 @@ function RitualInstanceSector({ instance, center, outerRadius, innerRadius }: Ri
                     }}
                 />
                 <text
-                    x={ft ? tc.x + tt : tc.x - tt} y={tc.y}
+                    x={ft ? tc.x - to : tc.x + to} y={tc.y}
                     textAnchor={ft ? "end" : "start"} alignmentBaseline="central"
                     style={{transform: `rotate(${ft ? ta + 180 : ta}deg)`, transformOrigin: `${tc.x}px ${tc.y}px`}}
                     className="fill-white/80 text-lg pointer-events-none"
