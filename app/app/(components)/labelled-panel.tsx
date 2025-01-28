@@ -30,7 +30,7 @@ export default function LabelledPanel ({ children, title, popover, button, ref, 
                     { popover && popover }
                     { button && button }
                 </div>
-                <div id="panel-ref" ref={ref} className={`${centerContents ? "flex items-center justify-center" : ""} flex-grow`}>
+                <div id="panel-ref" ref={ref} className={`${centerContents ? "flex items-center justify-center" : ""} flex-grow max-h-[calc(100vh-37px)] overflow-y-auto overflow-x-hidden`}>
                     { children }
                 </div>
             </div>
