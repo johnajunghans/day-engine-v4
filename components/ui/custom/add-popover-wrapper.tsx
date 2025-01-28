@@ -27,7 +27,7 @@ function AddPopoverWrapper({ popoverControl, isContentBlurred, title, children, 
             <div className="flex justify-between mb-4">
                 <h3 className="text-de_orange">{title}</h3>
                 <PopoverClose asChild>
-                    <Button aria-label="close" variant="icon" size="icon"><X className="!w-[18px] !h-[18px] stroke-de_orange_light" /></Button>
+                    <Button aria-label="close" variant="icon" size="icon"><X size={18} /></Button>
                 </PopoverClose>
             </div>
         )
@@ -37,7 +37,7 @@ function AddPopoverWrapper({ popoverControl, isContentBlurred, title, children, 
         <Popover modal open={popoverControl.isOpen} onOpenChange={popoverControl.setIsOpen}>
             <PopoverTrigger asChild>
                 <Button variant="icon" size="icon">
-                    <Plus className="stroke-de_orange !w-[18px] !h-[18px]" />
+                    <Plus size={20} className="!stroke-de_orange" />
                 </Button>
             </PopoverTrigger>
             <PopoverPortal>

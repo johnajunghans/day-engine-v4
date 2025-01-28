@@ -27,7 +27,7 @@ export default function WheelMain({ }) {
                     setPanelDimensions(dimensions)
                 }   
             }
-        }, [panelDimensions]
+        }, [panelDimensions.width, panelDimensions.height]
     ) 
 
     useLayoutEffect(() => {

@@ -26,7 +26,7 @@ export default function EditSheetWrapper({ title, description, children, align="
     return (
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-                { triggerAsChild ? children : <Button variant="icon" size="icon"><Edit /></Button> }
+                { triggerAsChild ? children : <Button variant="icon" size="icon"><Edit size={20} /></Button> }
             </SheetTrigger>
             <SheetContent side={align} className="!max-w-none border-de_orange_light_muted font-[family-name:var(--font-philosopher)] opacity-95 flex flex-col w-auto gap-4">
                 <SheetHeader>

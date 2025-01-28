@@ -6,15 +6,8 @@ import RitualTile from "./ritual-tile"
 import { Accordion } from "@/components/ui/accordion"
 import { useRituals } from "@/context/rituals-provider"
 
-// type RitualProps = {
-    
-// }
-
 export default function Rituals({ }) {
 
-    console.log("rituals rerendered")
-
-    // const [addRitualPopoverOpen, setAddRitualPopoverOpen] = useState(false)
     const { state: rituals } = useRituals()
 
     return (
