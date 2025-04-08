@@ -1,9 +1,8 @@
 import { DayOfWeek } from "@/lib/types/rhythm-types"
 import { useState } from "react"
-import RitualInstanceSector from "./ritual-instance-sector"
 import WheelDaySelector from "./wheel-day-selector"
 import { useRitualInstances } from "@/context/ritual-instances-provider"
-
+import RitualInstanceArc from "./ritual-instance-arc"
 interface WheelFunctionProps {
     svgSize: number
     center: number
@@ -87,7 +86,7 @@ export default function WheelFunction({ svgSize, center, outerCircleRadius, inne
                 </linearGradient>
             </defs>
             {instances[day].map(instance => (
-                <RitualInstanceSector key={instance.id} instance={instance} center={center} outerRadius={outerCircleRadius} innerRadius={innerRadius} />
+                <RitualInstanceArc key={instance.id} instance={instance} center={center} outerRadius={outerCircleRadius} innerRadius={innerRadius} />
             ))}
             <WheelDaySelector svgSize={svgSize} center={center} day={day} setDay={setDay} days={days} innerCircleRadius={innerRadius} />
         </>

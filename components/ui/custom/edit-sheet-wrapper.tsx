@@ -31,7 +31,7 @@ export default function EditSheetWrapper({ title, description, children, align="
             <SheetContent side={align} className="!max-w-none border-de_orange_light_muted font-[family-name:var(--font-philosopher)] opacity-95 flex flex-col w-auto gap-4">
                 <SheetHeader>
                     <SheetTitle>{title}</SheetTitle>
-                    <SheetDescription hidden={showDescription ? true : false}>{description}</SheetDescription>
+                    <SheetDescription hidden={!showDescription}>{description}</SheetDescription>
                 </SheetHeader>
                 { triggerAsChild ? form : children }
             </SheetContent>

@@ -6,12 +6,21 @@ import { debounce } from "lodash";
 import WheelOutline from "./wheel-outline";
 import WheelFunction from "./wheel-function";
 import AddInstancePopover from "./add-instance-popover";
+import { SunMoon } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-// interface WheelMainProps {
+function WheelControl() {
+    return (
+        <div className="flex items-center justify-center gap-1">
+            <AddInstancePopover />
+            <Button variant="icon" size="icon">
+                <SunMoon size={24} strokeWidth={2} className="stroke-de_orange" />
+            </Button>
+        </div>
+    )
+}
 
-// }
-
-export default function WheelMain({ }) {
+export default function WheelMain() {
 
     const panelRef = useRef<HTMLDivElement>(null)
     const [panelDimensions, setPanelDimensions] = useState({ width: 600, height: 600 })
@@ -47,8 +56,8 @@ export default function WheelMain({ }) {
             ref={panelRef} 
             onResize={debounce(() => handleWheelResize(), 500)} 
             centerContents 
-            popover={<AddInstancePopover />} 
-            bottomBorder
+            popover={<WheelControl />} 
+            hideHeader
         >
             {svgSize && <svg width={svgSize} height={svgSize} overflow="visible" className={`mx-2 transition-[blur] duration-200`}>
                 <WheelOutline center={center} outerCircleRadius={outerCircleRadius} />

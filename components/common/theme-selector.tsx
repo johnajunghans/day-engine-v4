@@ -41,9 +41,10 @@ const ThemeSelector: FunctionComponent<ThemeSelectorProps> = ({ align="end" }) =
                 </DropdownMenuRadioGroup> */}
                 <DropdownMenuSeparator />
                 <DropdownMenuRadioGroup value={color} onValueChange={setColor as (mode: string) => void}>
-                    {colors.map(color => (
-                        <DropdownMenuRadioItem value={color} key={color}>{color}</DropdownMenuRadioItem>
-                    ))}
+                    <DropdownMenuRadioItem value="default">Default</DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="blue">Lapis</DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="green">Aventurine</DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="purple">Amethyst</DropdownMenuRadioItem>
                 </DropdownMenuRadioGroup>
             </DropdownMenuContent>
         </DropdownMenu>

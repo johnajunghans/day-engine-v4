@@ -189,8 +189,20 @@ input[type="time"] {
   background-image: linear-gradient(to right bottom, #020617, #0d121f, #131a28, #182131, #1e293b);
 }
 
+/* SONNER STYLES */
+
 .sonner li {
   background-color: var(--background) !important;
   color: var(--de-orange);
   border: 1px solid var(--de-orange-light-muted) !important;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }

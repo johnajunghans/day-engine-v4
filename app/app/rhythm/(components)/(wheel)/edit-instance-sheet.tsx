@@ -122,9 +122,8 @@ export default function EditInstanceSheet({ instance, children, isOpen, setIsOpe
 
     return (
         <EditSheetWrapper
-            title="Edit Ritual"
-            description={`${instance.Rituals.name}`}
-            showDescription
+            title="Edit Ritual Instance"
+            description={`Edit Ritual Instance: ${instance.Rituals.name}`}
             align="right"
             isOpen={isOpen}
             setIsOpen={setIsOpen}

@@ -45,9 +45,9 @@ const LoginPopover = () => {
     return (  
         <Popover>
             <PopoverTrigger asChild>
-                <Button variant="text" className="px-2">
+                <Button variant="text" className="px-2 text-de_orange text-lg opacity-100 hover:opacity-80">
                     <span>Login</span>
-                    <Lock size={14} />
+                    <Lock size={16} />
                 </Button>
             </PopoverTrigger>
             <PopoverContent alignOffset={-8}>

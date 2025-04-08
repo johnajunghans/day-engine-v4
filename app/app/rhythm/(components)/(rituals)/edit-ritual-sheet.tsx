@@ -71,7 +71,7 @@ export default function EditRitualSheet({ ritual }: EditRitualSheetProps) {
     }
 
     return (
-        <EditSheetWrapper title="Edit Ritual" align="left" description={`${ritual.name}`} isOpen={isOpen} setIsOpen={setIsOpen}>
+        <EditSheetWrapper title="Edit Ritual" align="left" description={`Edit Ritual: ${ritual.name}`} isOpen={isOpen} setIsOpen={setIsOpen}>
             <RitualForm 
                 form={form}
                 handleSubmit={handleEditRitual as SubmitHandler<FieldValues>}

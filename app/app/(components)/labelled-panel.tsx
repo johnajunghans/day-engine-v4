@@ -13,24 +13,24 @@ interface LabelledPanelProps {
     maxSize?: number,
     onResize?: PanelOnResize,
     centerContents?: boolean
-    bottomBorder?: boolean
+    hideHeader?: boolean
 }
 
-export default function LabelledPanel ({ children, title, popover, button, ref, size, minSize, maxSize, onResize, centerContents, bottomBorder }: LabelledPanelProps) {
+export default function LabelledPanel ({ children, title, popover, button, ref, size, minSize, maxSize, onResize, centerContents, hideHeader }: LabelledPanelProps) {
   
     if (button && popover) throw Error("Button and Popover cannot both be defined with Labelled Panel component!");
 
     return (
         <ResizablePanel defaultSize={size} minSize={minSize} maxSize={maxSize} onResize={onResize}>
             <div className="w-full h-full flex flex-col">
-                <div className={`flex pr-2 gap-1 items-center border-b border-de_orange_light_muted ${bottomBorder ? "" : "absolute z-10"}`}>
-                    <div className={`py-2 px-4 border-r border-de_orange_light_muted flex justify-center items-center bg-background`}>
+                <div className={`flex h-11 pr-2 gap-1 items-center border-b border-de_orange_light_muted ${hideHeader ? "absolute z-10 pl-1" : ""}`}>
+                    {!hideHeader && <div className={`h-full px-4 border-r border-de_orange_light_muted flex justify-center items-center bg-background`}>
                         <span className="text-de_orange text-sm tracking-widest">{title}</span>
-                    </div>
+                    </div>}
                     { popover && popover }
                     { button && button }
                 </div>
-                <div id="panel-ref" ref={ref} className={`${centerContents ? "flex items-center justify-center" : ""} flex-grow max-h-[calc(100vh-37px)] overflow-y-auto overflow-x-hidden`}>
+                <div id="panel-ref" ref={ref} className={`${centerContents ? "flex items-center justify-center" : ""} flex-grow ${!hideHeader ? "max-h-[calc(100vh-37px)]" : ""} overflow-y-auto overflow-x-hidden`}>
                     { children }
                 </div>
             </div>
