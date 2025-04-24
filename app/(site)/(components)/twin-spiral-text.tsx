@@ -18,7 +18,7 @@ function generateSpiral(a: number, b: number, turns: number, steps: number, inve
 }
 
 const words = ["Rhythm", "Vision", "Reflection", "Ritual", "Routine", "Alchemy", "Magic", "Accumulation", "Pattern", "Stability", "Solidity", "Structure", "Downward", "Relaxation", "Imagination", "Direction", "Goal", "Seeking", "Focus", "Dream", "Desire", "Upward", "Expansion", "Meditation", "Space", "Movement", "Epiphany", "Change", "Release", "Contemplation", "Inward", "Integration", "Earth", "Water", "Fire", "Air", "Quintessence", "Purpose", "Balance", "Embodiment", "System", "Body", "Mind", "Spirit"]
-const yinWords =["Rhythm", "Ritual", "Routine", "Accumulation", "Pattern", "Stability", "Solidity", "Structure", "Downward", "Relaxation", "Discipline", "Consistency "]
+//  const yinWords =["Rhythm", "Ritual", "Routine", "Accumulation", "Pattern", "Stability", "Solidity", "Structure", "Downward", "Relaxation", "Discipline", "Consistency "]
 
 function getRandomWord() {
     return words[Math.floor(Math.random() * words.length)]
