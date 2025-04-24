@@ -73,7 +73,7 @@ export default function AddInstancePopover({  }) {
             popoverControl={{ isOpen, setIsOpen }}
             icon={<Plus size={24} />}
             sideOffset={16}
-            alignOffset={4}
+            alignOffset={-80}
         >
             <InstanceForm 
                 form={form}

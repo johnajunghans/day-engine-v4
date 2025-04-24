@@ -6,7 +6,6 @@ interface LabelledPanelProps {
     children: ReactNode, 
     title: string, 
     popover?: ReactNode, 
-    button?: ReactNode, 
     ref?: Ref<HTMLDivElement>,
     size?: number,
     minSize?: number,
@@ -16,9 +15,7 @@ interface LabelledPanelProps {
     hideHeader?: boolean
 }
 
-export default function LabelledPanel ({ children, title, popover, button, ref, size, minSize, maxSize, onResize, centerContents, hideHeader }: LabelledPanelProps) {
-  
-    if (button && popover) throw Error("Button and Popover cannot both be defined with Labelled Panel component!");
+export default function LabelledPanel ({ children, title, popover, ref, size, minSize, maxSize, onResize, centerContents, hideHeader }: LabelledPanelProps) {
 
     return (
         <ResizablePanel defaultSize={size} minSize={minSize} maxSize={maxSize} onResize={onResize}>
@@ -28,7 +25,6 @@ export default function LabelledPanel ({ children, title, popover, button, ref, 
                         <span className="text-de_orange text-sm tracking-widest">{title}</span>
                     </div>}
                     { popover && popover }
-                    { button && button }
                 </div>
                 <div id="panel-ref" ref={ref} className={`${centerContents ? "flex items-center justify-center" : ""} flex-grow ${!hideHeader ? "max-h-[calc(100vh-37px)]" : ""} overflow-y-auto overflow-x-hidden`}>
                     { children }
