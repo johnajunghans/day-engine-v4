@@ -9,7 +9,7 @@ interface ThemeSelectorProps {
 }
 
 // const modes: Mode[] = ["light", "dark"]
-const colors: Color[] = ["default", "blue", "green", "purple"]
+// const colors: Color[] = ["default", "blue", "green", "purple"]
  
 const ThemeSelector: FunctionComponent<ThemeSelectorProps> = ({ align="end" }) => {
 

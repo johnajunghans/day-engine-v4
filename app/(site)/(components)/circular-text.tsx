@@ -100,14 +100,14 @@ import React from 'react';
 //     return list.join(" · ");
 // }
 
-type TextData = {   
-    radius: number;
-    text: string;
-    id: number;
-}
+// type TextData = {   
+//     radius: number;
+//     text: string;
+//     id: number;
+// }
 
-const textData: TextData[] = [];
-const textDataRev: TextData[] = [];
+// const textData: TextData[] = [];
+// const textDataRev: TextData[] = [];
 
 // const textData1 = ["Rhythm", "Vision", "Reflection", ""].join(" · ")
 
@@ -202,7 +202,7 @@ export default function ConcentricCirclesOfText() {
     // const circle15Ref = React.useRef<HTMLCanvasElement | null>(null);
     // const circle16Ref = React.useRef<HTMLCanvasElement | null>(null);
 
-    const words = ["Rhythm", "Vision", "Reflection", "Ritual", "Routine", "Alchemy", "Magic", "Accumulation", "Pattern", "Stability", "Solidity", "Structure", "Downward", "Relaxation", "Imagination", "Direction", "Goal", "Seeking", "Focus", "Dream", "Desire", "Upward", "Expansion", "Meditation", "Space", "Movement", "Epiphany", "Change", "Release", "Contemplation", "Inward", "Integration", "Earth", "Water", "Fire", "Air", "Quintessence", "Purpose", "Balance", "Embodiment", "System", "Body", "Mind", "Spirit"];
+    // const words = ["Rhythm", "Vision", "Reflection", "Ritual", "Routine", "Alchemy", "Magic", "Accumulation", "Pattern", "Stability", "Solidity", "Structure", "Downward", "Relaxation", "Imagination", "Direction", "Goal", "Seeking", "Focus", "Dream", "Desire", "Upward", "Expansion", "Meditation", "Space", "Movement", "Epiphany", "Change", "Release", "Contemplation", "Inward", "Integration", "Earth", "Water", "Fire", "Air", "Quintessence", "Purpose", "Balance", "Embodiment", "System", "Body", "Mind", "Spirit"];
 
     const circleData = React.useMemo(() => ({
         circle1: {
@@ -308,7 +308,7 @@ export default function ConcentricCirclesOfText() {
     // const canvasRevRef = React.useRef<HTMLCanvasElement | null>(null);
     
     React.useEffect(() => {
-        Object.values(circleData).forEach((circle, i) => {
+        Object.values(circleData).forEach((circle) => {
             const canvas = circle.ref.current;
             console.log(canvas)
             if (canvas) {
