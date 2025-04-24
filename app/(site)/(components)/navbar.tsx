@@ -3,7 +3,6 @@
 import ThemeSelector from "@/components/common/theme-selector";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FunctionComponent } from "react";
@@ -27,11 +26,11 @@ const Navbar: FunctionComponent<NavbarProps> = ({ session }) => {
 
     return (
         <div className="flex gap-2 fixed m-2 w-[calc(100vw-16px)] z-10">
-            <div className="w-full h-12 flex justify-between items-center rounded-md bg-white/10 border border-white/15 backdrop-blur-sm">
+            <div className="w-full h-12 flex justify-between items-center rounded-md border border-white/5 backdrop-blur-sm px-2 shadow-md">
                 <nav className="flex gap-2 items-center">
                     <Link href="/" className="flex items-center">
-                        <Image priority src="/logo.png" alt="logo" width={48} height={48} className="animate-logo-spin" />
-                        <h3 className={`text-xl h-12 leading-[46px] ${pathname === "/" ? "text-de_orange" : "text-white_muted hover:text-white/80" }`}>Day Engine</h3>
+                        {/* <Image priority src="/logo.png" alt="logo" width={48} height={48} className="animate-logo-spin" /> */}
+                        <h3 className={`text-2xl h-12 leading-[48px] ${pathname === "/" ? "text-de_orange" : "text-white_muted hover:text-white/80" }`}>Day Engine</h3>
                     </Link>
                     {/* <Separator orientation="vertical" className="h-8" /> */}
                     {/* {links.map(link => (
@@ -39,11 +38,11 @@ const Navbar: FunctionComponent<NavbarProps> = ({ session }) => {
                     ))} */}
                 </nav>
                 <div className="flex items-center">
-                    <div className="flex gap-2 items-center pr-2">
+                    <div className="flex gap-2 items-center">
                         <ThemeSelector align="end" />
                         <Separator orientation="vertical" className="h-8" />
                         {session 
-                            ? <Button variant="text" className="pl-1 pr-4"><span>Account</span><User size={16} /></Button> 
+                            ? <Button variant="text" className="pl-1"><span>Account</span><User size={16} /></Button> 
                             : <LoginPopover />
                         }
                     </div>

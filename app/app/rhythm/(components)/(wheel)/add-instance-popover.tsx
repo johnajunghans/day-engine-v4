@@ -1,4 +1,4 @@
-import { AddPopoverWrapper } from "@/components/ui/custom/add-popover-wrapper";
+import { PopoverWrapper } from "@/components/ui/custom/popover-wrapper";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -9,6 +9,7 @@ import { formSchema, getRitualById, InstanceForm } from "./instance-form";
 import { useRituals } from "@/context/rituals-provider";
 import { toast } from "sonner";
 import { domain } from "@/lib/variables";
+import { Plus } from "lucide-react";
 
 // interface AddInstancePopoverProps {
     
@@ -67,11 +68,12 @@ export default function AddInstancePopover({  }) {
     }
 
     return (
-        <AddPopoverWrapper 
+        <PopoverWrapper 
             title="Create New Ritual Instance" 
             popoverControl={{ isOpen, setIsOpen }}
-            sideOffset={12}
-            alignOffset={-81}
+            icon={<Plus size={24} />}
+            sideOffset={16}
+            alignOffset={-80}
         >
             <InstanceForm 
                 form={form}
@@ -80,6 +82,6 @@ export default function AddInstancePopover({  }) {
                 setIsOpen={setIsOpen}
                 buttonName="Create"
             />
-        </AddPopoverWrapper>
+        </PopoverWrapper>
     )
 }

@@ -3,12 +3,13 @@ import { useState } from "react"
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
 import { z } from "zod"
 import { Color } from "./color-selector"
-import { AddPopoverWrapper } from "@/components/ui/custom/add-popover-wrapper"
+import { PopoverWrapper } from "@/components/ui/custom/popover-wrapper"
 import { useRituals } from "@/context/rituals-provider"
 import { Ritual } from "@/lib/types/rhythm-types"
 import { formSchema, RitualForm } from "./ritual-form"
 import { domain, isDev } from "@/lib/variables"
 import { toast } from "sonner"
+import { Plus } from "lucide-react"
 
 // type AddRitualPopoverProps = {
    
@@ -61,11 +62,12 @@ export default function AddRitualPopover ({  }) {
     }
 
     return (
-        <AddPopoverWrapper 
-            popoverControl={{ isOpen, setIsOpen }} 
+        <PopoverWrapper 
+            popoverControl={{ isOpen, setIsOpen }}
+            icon={<Plus size={24} />} 
             title="Create New Ritual" 
             isContentBlurred={isColorSelectorOpen}
-            sideOffset={12}
+            sideOffset={16}
             alignOffset={-92}
         >
             <RitualForm 
@@ -80,6 +82,6 @@ export default function AddRitualPopover ({  }) {
                 buttonName="Create"
                 width={400}
             />
-        </AddPopoverWrapper>
+        </PopoverWrapper>
     )
 }

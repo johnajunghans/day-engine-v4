@@ -64,7 +64,8 @@ export default {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		animation: {
-  			'logo-spin': 'spin 120s linear infinite',
+  			'logo-spin': 'spin 360s linear infinite',
+			'logo-spin-reverse': 'spin 720s linear infinite reverse',
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out'
   		},

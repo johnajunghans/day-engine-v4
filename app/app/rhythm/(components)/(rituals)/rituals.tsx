@@ -15,7 +15,7 @@ export default function Rituals({ }) {
             title="RITUALS" 
             size={34} minSize={20} maxSize={40} 
             popover={<AddRitualPopover />}
-            bottomBorder
+            
         >
             <div>
                 <Accordion type="multiple">

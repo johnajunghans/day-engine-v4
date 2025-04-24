@@ -1,4 +1,4 @@
-import { Plus, X } from "lucide-react";
+import { X } from "lucide-react";
 import { Button } from "../button";
 import { Popover, PopoverContent, PopoverTrigger } from "../popover";
 import { Dispatch, ReactNode, SetStateAction } from "react";
@@ -8,6 +8,7 @@ type PopoverControl = { isOpen: boolean, setIsOpen: Dispatch<SetStateAction<bool
 
 interface AddPopoverWrapperProps {
     popoverControl: PopoverControl
+    icon: ReactNode
     isContentBlurred?: boolean
     title: string
     children: ReactNode
@@ -20,14 +21,14 @@ interface PopoverHeaderProps {
     title: string,
 }
 
-function AddPopoverWrapper({ popoverControl, isContentBlurred, title, children, align="start", sideOffset=0, alignOffset=0 }: AddPopoverWrapperProps) {
+function PopoverWrapper({ popoverControl, icon, isContentBlurred, title, children, align="start", sideOffset=0, alignOffset=0 }: AddPopoverWrapperProps) {
 
     function Header({ title }: PopoverHeaderProps) {
         return (
             <div className="flex justify-between mb-4">
                 <h3 className="text-de_orange">{title}</h3>
                 <PopoverClose asChild>
-                    <Button aria-label="close" variant="icon" size="icon"><X size={18} /></Button>
+                    <Button aria-label="close" variant="icon" size="icon"><X size={24} /></Button>
                 </PopoverClose>
             </div>
         )
@@ -37,7 +38,7 @@ function AddPopoverWrapper({ popoverControl, isContentBlurred, title, children, 
         <Popover modal open={popoverControl.isOpen} onOpenChange={popoverControl.setIsOpen}>
             <PopoverTrigger asChild>
                 <Button variant="icon" size="icon">
-                    <Plus size={20} className="!stroke-de_orange" />
+                    { icon }
                 </Button>
             </PopoverTrigger>
             <PopoverPortal>
@@ -54,6 +55,6 @@ function AddPopoverWrapper({ popoverControl, isContentBlurred, title, children, 
 }
 
 export {
-    AddPopoverWrapper,
+    PopoverWrapper,
     type PopoverControl 
 }

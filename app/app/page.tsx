@@ -1,6 +1,8 @@
+import { redirect } from "next/navigation"
+
 export default function Dashboard() {
 
-    console.log("Function run!")
+    redirect('/app/rhythm')
 
     return (
         <div>Homepage</div>
