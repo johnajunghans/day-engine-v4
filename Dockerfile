@@ -1,0 +1,9 @@
+FROM node:20-slim
+
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
+
+RUN npm install -g @anthropic-ai/claude-code@2.1.138
+
+WORKDIR /app
+
+ENTRYPOINT ["claude"]
